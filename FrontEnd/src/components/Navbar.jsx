@@ -9,7 +9,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <NavLink to="/home" className="flex items-center gap-6">
               <img 
-                src="/Logo.png" 
+                src="/assets/images/Logo.png" 
                 alt="StuTech Logo" 
                 className="h-10 w-auto ml-20" 
               />
@@ -65,7 +65,7 @@ const Navbar = () => {
           <div>
             <NavLink 
               to="/get-started" 
-              className="bg-blue-700 hover:bg-blue-900 text-white px-8 mr-22 py-2 rounded-full text-sm font-medium"
+              className="bg-[#1E3A8A] hover:bg-blue-900 text-white px-8 mr-22 py-2 rounded-full text-sm font-medium"
             >
               Get Started
             </NavLink>

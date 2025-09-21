@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FaCog,
   FaPalette,
@@ -10,27 +10,345 @@ import {
   FaInstagram,
   FaGithub,
   FaPhone,
+  FaArrowRight,
 } from "react-icons/fa";
 import { BsCheckCircle, BsLightning, BsPersonCircle } from "react-icons/bs";
 import { RiRocketLine, RiUserLine } from "react-icons/ri";
+import Swiper from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const Homepage = () => {
+  useEffect(() => {
+    new Swiper(".swiper-container", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  }, []);
+
   return (
     <>
-    
+      <div className="min-h-[95vh] w-full py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#F3F4F6] via-[#2563EB88] to-[#1E3A8A] relative">
+        <img
+          src="/assets/images/shape1.png"
+          alt="Upper right decoration"
+          style={{
+            position: "absolute",
+            top: "-40px",
+            right: "-380px",
+            width: "34%",
+            height: "auto",
+            objectFit: "cover",
+            maskImage: "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0.4))",
+            WebkitMaskImage:
+              "linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0.4))",
+            clipPath: "inset(0% 50% 0% 0%)",
+          }}
+        />
+
+        <img
+          src="/assets/images/shape2.png"
+          alt="Lower left decoration"
+          style={{
+            position: "absolute",
+            top: "480px",
+            right: "100px",
+            left: "-200px",
+            width: "23%",
+            height: "auto",
+            objectFit: "cover",
+            maskImage:
+              "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.4))",
+            WebkitMaskImage:
+              "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.4))",
+          }}
+        />
+        <div className="max-w-7xl mx-auto text-center mt-5">
+          <h1
+            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="text-8xl font-extrabold text-gray-900 mb-6"
+          >
+            We design and build
+          </h1>
+          <h2
+            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="text-8xl font-bold text-[#1e3a8a] mb-6"
+          >
+            digital solutions
+          </h2>
+          <h2
+            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="text-8xl font-bold text-gray-900 mb-13"
+          >
+            that power growth
+          </h2>
+          <h3
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="font-medium text-2xl text-gray-900"
+          >
+            From UI/UX to full-scale systems, we deliver modern applications
+          </h3>
+          <h3
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="font-medium text-2xl text-gray-900 mt-2"
+          >
+            tailored to your business needs. Transform your ideas into
+          </h3>
+          <h3
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="font-medium text-2xl text-gray-900 mt-2"
+          >
+            powerful digital experiences.
+          </h3>
+          <div className="mt-13 flex justify-center items-center">
+            <button
+              className="bg-[#1E3A8A] hover:bg-blue-900 text-white px-8 py-4 rounded-full text-base font-medium cursor-pointer flex items-center"
+              onClick={() => alert("Button clicked!")}
+            >
+              Talk to our Team <FaArrowRight className="ml-2" />
+            </button>
+          </div>
+        </div>
+      </div>
+      {/*our mission*/}
+      <div className="min-h-[130vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#FFFFFF88] to-[#BDCBFD] relative">
+        <div className="max-w-7xl mx-auto text-center mt-13">
+          <h3
+            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="font-semibold text-5xl text-gray-900 mt-10"
+          >
+            Who We Are
+          </h3>
+          <p
+            style={{ fontFamily: "Poppins, sans-serif", lineHeight: "1.5" }}
+            className="font-medium text-2xl justify-center items-center mt-10 text-gray-900"
+          >
+            We are a forward-thinking startup dedicated to system generation,
+            UI/UX design, and web & mobile <br />
+            application development. At{" "}
+            <span
+              style={{ color: "#1E3A8A" }}
+              className="font-extrabold"
+            >
+              StuTech
+            </span>
+            , we believe technology should not only be powerful but also <br />
+            simple, accessible, and designed with users in mind. Our goal is to
+            empower businesses and <br />
+            individuals with digital solutions that truly make life easier.
+          </p>
+          <div className="p-4 rounded-lg bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] min-h-[600px] mt-20 flex gap-4 relative overflow-hidden">
+            {/* Top-left image */}
+            <img
+              src="/assets/images/upleft.png"
+              className="absolute top-[-40px] left-[-85px] w-45 h-45 object-cover rounded-md"
+              alt="Top Left Corner"
+            />
+            {/* Top-right image */}
+            <img
+              src="/assets/images/upright.png"
+              className="absolute top-[-40px] right-[-85px] w-45 h-45 object-cover rounded-md"
+              alt="Top Right Corner"
+            />
+            {/* Bottom-left image */}
+            <img
+              src="/assets/images/bottomleft.png"
+              className="absolute bottom-[-95px] left-[-85px] w-45 h-45 object-cover rounded-md"
+              alt="Bottom Left Corner"
+            />
+            {/* Bottom-right image */}
+            <img
+              src="/assets/images/bottomright.png"
+              className="absolute bottom-[-95px] right-[-85px] w-45 h-45 object-cover rounded-md"
+              alt="Bottom Right Corner"
+            />
+            <div className="flex-1 p-4 rounded-md text-left">
+              <h3
+                style={{ fontFamily: "Poppins, sans-serif" }}
+                className="font-medium text-3xl mt-5 m-15"
+              >
+                Our Mission
+              </h3>
+              <p
+                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "1.5" }}
+                className="m-15 mt-[-20px] text-justify text-xl tracking-wider"
+              >
+                To bridge the gap between innovative technology and exceptional
+                user experiences by creating seamless, reliable, and scalable
+                solutions tailored to real-world needs.
+              </p>
+              <ul
+                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2.5" }}
+                className="m-20 mt-[-20px] text-justify text-xl text-[#1E3A8A] list-disc"
+              >
+                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                  Innovative & user-focused approach
+                </li>
+                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                  Scalable solutions for growth
+                </li>
+                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                  End-to-end development expertise
+                </li>
+              </ul>
+            </div>
+            <div className="flex-1 p-5 mb-5 mr-4 rounded-3xl flex justify-center h-full m-[15px] items-center overflow-hidden">
+              <img
+                src="/assets/images/team.png"
+                className="w-full h-full object-cover mb-2 mr-10 rounded-3xl"
+                alt="Team"
+              />
+            </div>
+          </div>
+      </div>
+         <div className="w-full mx-auto min-h-[1200px] mr-10 ml-[-10px] pt-10 p-25 mt-45 rounded-lg border-2 drop-shadow-2xl border-white bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] flex justify-center items-center" style={{ boxShadow: 'inset 0 -5px 12px -6px rgba(255, 255, 255, 0.9)' }}>
+            <div className="text-center mt-[-500px]">
+              <h3
+                style={{ fontFamily: "Poppins, sans-serif" }}
+                className="font-semibold text-5xl text-gray-900"
+              >
+                Meet Our Team
+              </h3>
+              <p
+                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2" }}
+                className="mt-5 text-justify text-2xl text-gray-900 font-medium mb-40"
+              >
+                Comprehensive digital solutions designed to transform your
+                business and accelerate growth
+              </p>
+              <div className="w-full max-w-6xl mt-10">
+                <div className="swiper-container">
+                  <div className="swiper-wrapper">
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-john-smith-image.jpg" 
+                          alt="John Smith"
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          John Smith
+                        </h4>
+                        <p className="text-gray-600">Company CEO</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-david-johnson-image.jpg" 
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          David Johnson
+                        </h4>
+                        <p className="text-gray-600">Co-Founder</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-david-johnson-image.jpg" 
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          David Johnson
+                        </h4>
+                        <p className="text-gray-600">Co-Founder</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-david-johnson-image.jpg" 
+                          alt="David Johnson"
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          David Johnson
+                        </h4>
+                        <p className="text-gray-600">Co-Founder</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-david-johnson-image.jpg" 
+                          alt="David Johnson"
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          David Johnson
+                        </h4>
+                        <p className="text-gray-600">Co-Founder</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-mary-johnson-image.jpg" 
+                          alt="Mary Johnson"
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          Mary Johnson
+                        </h4>
+                        <p className="text-gray-600">Property Managers</p>
+                      </div>
+                    </div>
+                    <div className="swiper-slide">
+                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                        <img
+                          src="/path-to-patricia-davis-image.jpg" 
+                          alt="Patricia Davis"
+                          className="w-32 h-32 object-cover rounded-full mb-4"
+                        />
+                        <h4 className="text-xl font-semibold text-gray-900">
+                          Patricia Davis
+                        </h4>
+                        <p className="text-gray-600">Estate Consultant</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="swiper-pagination"></div>
+                  <div className="swiper-button-prev"></div>
+                  <div className="swiper-button-next"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+      </div>
+
       <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <h2 className="text-4xl font-bold text-center mb-4">What We Offer</h2>
 
           {/* Section Subtitle */}
-          <p className="text-lg text-center text-gray-700 mb-16 max-w-4xl mx-auto ">
+          <p className="text-lg text-center text-gray-700 mb-16 max-w-4xl mx-auto">
             Comprehensive digital solutions designed to transform your business
             and accelerate growth
           </p>
 
           {/* Cards Container */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* System Generation Card */}
             <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
               <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
@@ -86,7 +404,7 @@ const Homepage = () => {
             </div>
 
             {/* UI/UX Design Card */}
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh]  shadow-lg shadow-gray-600">
+            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
               <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -140,7 +458,7 @@ const Homepage = () => {
             </div>
 
             {/* Web Application Development Card */}
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh]  shadow-lg shadow-gray-600">
+            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
               <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -194,7 +512,7 @@ const Homepage = () => {
             </div>
 
             {/* Mobile Application Development Card */}
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh]  shadow-lg shadow-gray-600">
+            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
               <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -265,7 +583,7 @@ const Homepage = () => {
           </p>
 
           {/* First row - 3 cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 mb-8 justify-items-center items-center ">
+          <div className="grid grid-cols-1 md:grid-cols-3 mb-8 justify-items-center items-center">
             {/* Custom-built Solutions Card */}
             <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
               <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
@@ -302,7 +620,7 @@ const Homepage = () => {
 
             {/* End-to-end Support Card */}
             <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF]  h-[2vh] rounded-t-2xl"></div>
+              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
                   <BsPersonCircle className="text-2xl text-gray-700" />
@@ -337,7 +655,7 @@ const Homepage = () => {
 
             {/* User-first Design Approach Card */}
             <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF]  h-[2vh] rounded-t-2xl"></div>
+              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
                   <RiUserLine className="text-2xl text-gray-700" />
@@ -355,7 +673,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <hr className="border border-white" />
+      <hr className="border-white" />
 
       {/* How We Work Section */}
       <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
@@ -372,7 +690,7 @@ const Homepage = () => {
           {/* Process Steps */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
             {/* Step 1 */}
-            <div className="flex flex-col items-center ">
+            <div className="flex flex-col items-center">
               <div className="bg-gray-300 w-14 h-14 rounded-full flex items-center justify-center mb-6 relative z-10">
                 <div className="text-blue-700 font-bold text-xl px-3 py-1 rounded-full bg-[#BDCBFD]">
                   {" "}
@@ -558,7 +876,7 @@ const Homepage = () => {
             <input
               type="email"
               placeholder="What's your work email?"
-              className="flex-1 px-4 py-3  focus:outline-none bg-white"
+              className="flex-1 px-4 py-3 focus:outline-none bg-white"
             />
             <button className="bg-[#1E3A8A] hover:bg-blue-800 text-black px-6 py-3 rounded-lg font-semibold transition-colors">
               Get started
@@ -579,7 +897,7 @@ const Homepage = () => {
             {/* Company Logo and Info */}
             <div className="md:col-span-1">
               <div className="flex items-center mb-55">
-                <div className="w-10 h-10  rounded-lg flex items-center justify-center mr-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
                   <img
                     src="/Logo.png"
                     alt="StuTech Logo"
