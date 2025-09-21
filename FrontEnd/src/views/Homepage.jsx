@@ -899,7 +899,7 @@ const Homepage = () => {
               <div className="flex items-center mb-55">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
                   <img
-                    src="/Logo.png"
+                    src="/assets/images/Logo.png"
                     alt="StuTech Logo"
                     className="h-15 w-auto"
                   />
