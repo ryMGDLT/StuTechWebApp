@@ -193,6 +193,6 @@ To deploy the StuTechWebApp, follow these steps:
 
 ### Additional Resources
 - **GitHub Repository:** [StuTechWebApp](https://github.com/yourusername/StuTechWebApp)
-- **Documentation:** [StuTechWebApp Documentation](https://github.com/ryMGDLT/StuTechWebApp/blob/main/README.md)](https://github.com/ryMGDLT/StuTechWebApp)
+- **Documentation:** [StuTechWebApp Documentation](https://github.com/ryMGDLT/StuTechWebApp/blob/main/README.md)]
 
 This technical documentation provides a comprehensive overview of the StuTechWebApp, including its architecture, setup, API documentation, database schema, configuration, development guidelines, and deployment instructions.
