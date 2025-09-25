@@ -19,10 +19,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// Define props interface (empty for now, for future extensibility)
+
 interface HomepageProps {}
 
-// Define Swiper configuration type (minimal, since @types/swiper may not be installed)
+
 interface SwiperConfig {
   slidesPerView: number;
   spaceBetween: number;
@@ -64,16 +64,16 @@ const Homepage: React.FC<HomepageProps> = () => {
       },
     };
 
-    // Initialize Swiper (using any for simplicity; install @types/swiper for better typing)
+    
     const swiper = new Swiper(".swiper-container", swiperConfig);
 
-    // Cleanup Swiper instance on component unmount
+    
     return () => {
       swiper.destroy(true, true);
     };
   }, []);
 
-  // Type the onClick handler for the button
+  
   const handleButtonClick = (): void => {
     alert("Button clicked!");
   };
@@ -872,7 +872,7 @@ const Homepage: React.FC<HomepageProps> = () => {
             </div>
 
             {/* Floating Animation CSS */}
-            <style jsx>{`
+            <style>{`
               @keyframes float {
                 0%,
                 100% {
