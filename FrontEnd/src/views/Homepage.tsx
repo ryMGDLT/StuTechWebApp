@@ -19,9 +19,31 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const Homepage = () => {
+// Define props interface (empty for now, for future extensibility)
+interface HomepageProps {}
+
+// Define Swiper configuration type (minimal, since @types/swiper may not be installed)
+interface SwiperConfig {
+  slidesPerView: number;
+  spaceBetween: number;
+  pagination: {
+    el: string;
+    clickable: boolean;
+  };
+  navigation: {
+    nextEl: string;
+    prevEl: string;
+  };
+  breakpoints: {
+    [key: number]: {
+      slidesPerView: number;
+    };
+  };
+}
+
+const Homepage: React.FC<HomepageProps> = () => {
   useEffect(() => {
-    new Swiper(".swiper-container", {
+    const swiperConfig: SwiperConfig = {
       slidesPerView: 3,
       spaceBetween: 30,
       pagination: {
@@ -40,8 +62,21 @@ const Homepage = () => {
           slidesPerView: 3,
         },
       },
-    });
+    };
+
+    // Initialize Swiper (using any for simplicity; install @types/swiper for better typing)
+    const swiper = new Swiper(".swiper-container", swiperConfig);
+
+    // Cleanup Swiper instance on component unmount
+    return () => {
+      swiper.destroy(true, true);
+    };
   }, []);
+
+  // Type the onClick handler for the button
+  const handleButtonClick = (): void => {
+    alert("Button clicked!");
+  };
 
   return (
     <>
@@ -120,19 +155,19 @@ const Homepage = () => {
           <div className="mt-13 flex justify-center items-center">
             <button
               className="bg-[#1E3A8A] hover:bg-blue-900 text-white px-8 py-4 rounded-full text-base font-medium cursor-pointer flex items-center"
-              onClick={() => alert("Button clicked!")}
+              onClick={handleButtonClick}
             >
               Talk to our Team <FaArrowRight className="ml-2" />
             </button>
           </div>
         </div>
       </div>
-      {/*our mission*/}
+      {/* Our Mission */}
       <div className="min-h-[130vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#FFFFFF88] to-[#BDCBFD] relative">
-        <div className="max-w-7xl mx-auto text-center mt-13">
+        <div className="max-w-7xl mx-auto text-center mt-5">
           <h3
             style={{ fontFamily: "Poppins, sans-serif" }}
-            className="font-semibold text-5xl text-gray-900 mt-10"
+            className="font-semibold text-5xl text-gray-900 mt-3"
           >
             Who We Are
           </h3>
@@ -217,123 +252,124 @@ const Homepage = () => {
               />
             </div>
           </div>
-      </div>
-         <div className="w-full mx-auto min-h-[1200px] mr-10 ml-[-10px] pt-10 p-25 mt-45 rounded-lg border-2 drop-shadow-2xl border-white bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] flex justify-center items-center" style={{ boxShadow: 'inset 0 -5px 12px -6px rgba(255, 255, 255, 0.9)' }}>
-            <div className="text-center mt-[-500px]">
-              <h3
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="font-semibold text-5xl text-gray-900"
-              >
-                Meet Our Team
-              </h3>
-              <p
-                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2" }}
-                className="mt-5 text-justify text-2xl text-gray-900 font-medium mb-40"
-              >
-                Comprehensive digital solutions designed to transform your
-                business and accelerate growth
-              </p>
-              <div className="w-full max-w-6xl mt-10">
-                <div className="swiper-container">
-                  <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-john-smith-image.jpg" 
-                          alt="John Smith"
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          John Smith
-                        </h4>
-                        <p className="text-gray-600">Company CEO</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-david-johnson-image.jpg" 
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          David Johnson
-                        </h4>
-                        <p className="text-gray-600">Co-Founder</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-david-johnson-image.jpg" 
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          David Johnson
-                        </h4>
-                        <p className="text-gray-600">Co-Founder</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-david-johnson-image.jpg" 
-                          alt="David Johnson"
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          David Johnson
-                        </h4>
-                        <p className="text-gray-600">Co-Founder</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-david-johnson-image.jpg" 
-                          alt="David Johnson"
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          David Johnson
-                        </h4>
-                        <p className="text-gray-600">Co-Founder</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-mary-johnson-image.jpg" 
-                          alt="Mary Johnson"
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          Mary Johnson
-                        </h4>
-                        <p className="text-gray-600">Property Managers</p>
-                      </div>
-                    </div>
-                    <div className="swiper-slide">
-                      <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-                        <img
-                          src="/path-to-patricia-davis-image.jpg" 
-                          alt="Patricia Davis"
-                          className="w-32 h-32 object-cover rounded-full mb-4"
-                        />
-                        <h4 className="text-xl font-semibold text-gray-900">
-                          Patricia Davis
-                        </h4>
-                        <p className="text-gray-600">Estate Consultant</p>
-                      </div>
+        </div>
+        <div className="w-full mx-auto min-h-[1200px] mr-10 ml-[-10px] pt-10 p-25 mt-25 rounded-lg border-2 drop-shadow-2xl border-white bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] flex justify-center items-center" style={{ boxShadow: 'inset 0 -5px 12px -6px rgba(255, 255, 255, 0.9)' }}>
+          <div className="text-center mt-[-400px]">
+            <h3
+              style={{ fontFamily: "Poppins, sans-serif" }}
+              className="font-semibold text-5xl text-gray-900"
+            >
+              Meet Our Team
+            </h3>
+            <p
+              style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2" }}
+              className="mt-5 text-justify text-2xl text-gray-900 font-medium mb-40"
+            >
+              Comprehensive digital solutions designed to transform your
+              business and accelerate growth
+            </p>
+            <div className="w-full max-w-6xl mt-10">
+              <div className="swiper-container">
+                <div className="swiper-wrapper">
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-john-smith-image.jpg"
+                        alt="John Smith"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        John Smith
+                      </h4>
+                      <p className="text-gray-600">Company CEO</p>
                     </div>
                   </div>
-                  <div className="swiper-pagination"></div>
-                  <div className="swiper-button-prev"></div>
-                  <div className="swiper-button-next"></div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-david-johnson-image.jpg"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                        alt="David Johnson"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        David Johnson
+                      </h4>
+                      <p className="text-gray-600">Co-Founder</p>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-david-johnson-image.jpg"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                        alt="David Johnson"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        David Johnson
+                      </h4>
+                      <p className="text-gray-600">Co-Founder</p>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-david-johnson-image.jpg"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                        alt="David Johnson"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        David Johnson
+                      </h4>
+                      <p className="text-gray-600">Co-Founder</p>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-david-johnson-image.jpg"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                        alt="David Johnson"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        David Johnson
+                      </h4>
+                      <p className="text-gray-600">Co-Founder</p>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-mary-johnson-image.jpg"
+                        alt="Mary Johnson"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        Mary Johnson
+                      </h4>
+                      <p className="text-gray-600">Property Managers</p>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
+                      <img
+                        src="/path-to-patricia-davis-image.jpg"
+                        alt="Patricia Davis"
+                        className="w-32 h-32 object-cover rounded-full mb-4"
+                      />
+                      <h4 className="text-xl font-semibold text-gray-900">
+                        Patricia Davis
+                      </h4>
+                      <p className="text-gray-600">Estate Consultant</p>
+                    </div>
+                  </div>
                 </div>
+                <div className="swiper-pagination"></div>
+                <div className="swiper-button-prev"></div>
+                <div className="swiper-button-next"></div>
               </div>
             </div>
           </div>
-       
+        </div>
       </div>
 
       <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
@@ -766,7 +802,7 @@ const Homepage = () => {
               {[...Array(12)].map((_, index) => (
                 <div
                   key={`row1-${index}`}
-                  className={`bg-white/80 rounded-full shadow-lg ${
+                  className={`bg-white/80 rounded-full shadow-lg animate-float ${
                     index % 3 === 0
                       ? "w-6 h-6"
                       : index % 3 === 1
@@ -785,7 +821,7 @@ const Homepage = () => {
               {[...Array(10)].map((_, index) => (
                 <div
                   key={`row2-${index}`}
-                  className={`bg-blue-100/70 rounded-full shadow-md ${
+                  className={`bg-blue-100/70 rounded-full shadow-md animate-float ${
                     index % 2 === 0 ? "w-5 h-5" : "w-7 h-7"
                   }`}
                   style={{
@@ -800,7 +836,7 @@ const Homepage = () => {
               {[...Array(14)].map((_, index) => (
                 <div
                   key={`row3-${index}`}
-                  className={`bg-white/60 rounded-full shadow-sm ${
+                  className={`bg-white/60 rounded-full shadow-sm animate-float ${
                     index % 4 === 0
                       ? "w-3 h-3"
                       : index % 4 === 1
@@ -821,7 +857,7 @@ const Homepage = () => {
               {[...Array(8)].map((_, index) => (
                 <div
                   key={`row4-${index}`}
-                  className={`bg-blue-50/80 rounded-full shadow-md ${
+                  className={`bg-blue-50/80 rounded-full shadow-md animate-float ${
                     index % 3 === 0
                       ? "w-7 h-7"
                       : index % 3 === 1
