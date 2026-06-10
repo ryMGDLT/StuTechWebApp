@@ -58,7 +58,7 @@ All team members must read and follow `AGENTS.md`. This document defines **who d
 
 **Workflow**
 
-1. Clone repo; run `FrontEnd` and `BackEnd` per README
+1. Clone repo; from root run `npm install`, `npm run install:all`, then `npm run dev` (or work per-package in `FrontEnd/` / `BackEnd/`)
 2. Create `FrontEnd/.env.example` and `BackEnd/.env.example` (never commit real `.env`)
 3. When wiring contact form: frontend Zod schema + backend Zod schema + shared field limits
 4. Use Vite dev proxy (`/api` → `localhost:5000`) for local API calls
@@ -188,9 +188,9 @@ Each teammate commits their own work to the **shared active branch** — not to 
 1. `git branch --show-current` — confirm you are on the team’s active branch (do not switch away or create a new one)
 2. `git pull` — sync with teammates’ latest commits on that branch
 3. `git status` — confirm no `.env` or `node_modules` are staged
-4. **`npm run lint`** — in every package you changed (`FrontEnd/`, `BackEnd/`, or both). Fix all lint errors before committing.
-5. **`npm run test`** — run unit tests (Vitest or Jest) for **each feature you added or modified**. Do not commit without passing tests for your changes. If you add a feature, you add tests for it in the same commit (or the commit immediately before it).
-6. **`npm run build`** — in `FrontEnd/` when UI or frontend config changed; confirm the build succeeds.
+4. **`npm run lint`** — from repo root, or in `FrontEnd/` when only frontend changed. Fix all lint errors before committing.
+5. **`npm run test`** — from repo root (`npm run test`), or per package (`test:frontend` / `test:backend`). Add tests for each feature you added or modified.
+6. **`npm run build`** — from repo root when UI or frontend config changed; confirm the build succeeds.
 7. Commit and push only when steps 4–6 pass.
 
 **Test expectations by change type**

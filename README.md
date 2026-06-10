@@ -30,7 +30,8 @@ StuTechWebApp/
 │   ├── vite.config.ts
 │   └── package.json
 ├── BackEnd/                  # Express API (future lead capture)
-│   └── server.js
+│   └── server.js             # JavaScript entry (use node / nodemon)
+├── package.json              # Root scripts: dev, build, test, start
 ├── AGENTS.md                 # Engineering rules (required reading)
 ├── PROJECT_OVERVIEW.md       # PM executive summary
 ├── TEAM_INSTRUCTIONS.md      # Role-based workflows
@@ -54,16 +55,21 @@ git clone <repository-url>
 cd StuTechWebApp
 ```
 
-### 2. Install frontend dependencies
+### 2. Install dependencies (recommended — from repo root)
 
 ```sh
-cd FrontEnd
 npm install
+npm run install:all
 ```
+
+This installs root orchestration tools plus `FrontEnd/` and `BackEnd/` packages.
+
+**Alternative:** install each package separately with `npm install` inside `FrontEnd/` and `BackEnd/`.
 
 ### 3. Configure environment variables
 
 ```sh
+cd FrontEnd
 cp .env.example .env
 ```
 
@@ -75,49 +81,94 @@ Edit `.env` with local values. Only `VITE_*` variables are exposed to the browse
 
 **Never commit `.env` files.** Secrets must not use the `VITE_` prefix.
 
-### 4. Install backend dependencies (optional)
+## Root `package.json` scripts (local development only)
 
-Only needed when working on API features:
+The repo root has a **convenience** `package.json` that delegates to `FrontEnd/` and `BackEnd/`. It does **not** replace those packages and is **not** used by Vercel when each project’s Root Directory is set correctly (see [Build and Deploy](#build-and-deploy)).
 
-```sh
-cd ../BackEnd
-npm install
-```
+Run all commands below from the **repository root** (`StuTechWebApp/`).
 
-## Development Workflow
-
-Run frontend and backend in **separate terminals**.
-
-### Frontend dev server
+### Install
 
 ```sh
-cd FrontEnd
-npm run dev
+npm install              # root tools (concurrently)
+npm run install:all      # npm install in FrontEnd + BackEnd
 ```
 
-Opens at [http://localhost:3000](http://localhost:3000) by default.
+### Dev
+
+```sh
+npm run dev              # FrontEnd + BackEnd together
+npm run dev:frontend     # Vite only → http://localhost:3000
+npm run dev:backend      # nodemon server.js → http://localhost:5000
+```
+
+| Script | Runs |
+|--------|------|
+| `dev` | `concurrently` → `npm run dev --prefix FrontEnd` + `npm run dev --prefix BackEnd` |
+| `dev:frontend` | `npm run dev --prefix FrontEnd` → `vite` |
+| `dev:backend` | `npm run dev --prefix BackEnd` → `nodemon server.js` |
+
+### Build and preview
+
+```sh
+npm run build            # vite build → FrontEnd/dist/
+npm run preview          # preview production build locally
+```
+
+| Script | Runs |
+|--------|------|
+| `build` | `npm run build --prefix FrontEnd` → `vite build` |
+| `preview` | `npm run preview --prefix FrontEnd` → `vite preview` |
+
+### Start (backend production)
+
+```sh
+npm run start            # node server.js on port 5000
+```
+
+| Script | Runs |
+|--------|------|
+| `start` | `npm run start --prefix BackEnd` → `node server.js` |
+
+### Lint
+
+```sh
+npm run lint             # ESLint on FrontEnd
+```
+
+| Script | Runs |
+|--------|------|
+| `lint` | `npm run lint --prefix FrontEnd` → `eslint .` |
+
+### Test
+
+```sh
+npm run test             # FrontEnd + BackEnd
+npm run test:frontend    # Vitest only
+npm run test:backend     # Node test runner only
+```
+
+| Script | Runs |
+|--------|------|
+| `test` | `npm run test --prefix FrontEnd` → `vitest run`, then `npm run test --prefix BackEnd` → `node --test tests/smoke.test.js` |
+| `test:frontend` | `npm run test --prefix FrontEnd` → `vitest run` |
+| `test:backend` | `npm run test --prefix BackEnd` → `node --test tests/smoke.test.js` |
 
 The Vite config proxies `/api` requests to `http://localhost:5000` for local API development.
 
-### Backend dev server (optional)
-
-```sh
-cd BackEnd
-node server.js
-```
-
-Runs at [http://localhost:5000](http://localhost:5000). Currently serves only a health message on `GET /`.
-
-### Other scripts
+### Per-package (when you only changed one side)
 
 | Command | Location | Description |
 |---------|----------|-------------|
+| `npm run dev` | FrontEnd | Vite dev server |
+| `npm run dev` | BackEnd | `nodemon server.js` (JS — no tsx) |
+| `npm run start` | BackEnd | `node server.js` |
 | `npm run build` | FrontEnd | Production build to `dist/` |
 | `npm run preview` | FrontEnd | Preview production build locally |
-| `npx shadcn@latest add <name>` | FrontEnd | Add a shadcn/ui component to `src/components/ui/` |
-| `npm run lint` | FrontEnd | Run ESLint (TypeScript + React) |
-| `npm run test` | FrontEnd | Run Vitest unit tests |
-| `npm run test` | BackEnd | Run Node test runner |
+| `npx shadcn@latest add <name>` | FrontEnd | Add a shadcn/ui component |
+| `npm run lint` | FrontEnd | ESLint (TypeScript + React) |
+| `npm run test` | FrontEnd | Vitest |
+| `npm run test` | BackEnd | Node built-in test runner |
 
 ## Environment Variables
 
@@ -146,18 +197,41 @@ CONTACT_WEBHOOK_URL=
 
 ## Build and Deploy
 
+FrontEnd and BackEnd are **separate deployable units**. Production hosts must point at each package folder — not the monorepo root.
+
+### Vercel (production — do not change lightly)
+
+Use **two Vercel projects** (or one for the static site only) with these settings:
+
+| Vercel project | Root Directory | Install Command | Build Command | Output Directory |
+|----------------|----------------|-----------------|---------------|------------------|
+| **Frontend (site)** | `FrontEnd` | `npm install` (default) | `npm run build` | `dist` |
+| **Backend (API)** | `BackEnd` | `npm install` (default) | none or host-specific | n/a |
+
+> **Important:** Keep **Root Directory** set to `FrontEnd` for the marketing site.  
+> Do **not** set the Vercel root to the repository root (`/`) unless you intentionally reconfigure install/build — the root `package.json` is for **local dev only** and a misconfigured root can break production builds.
+
+Configure SPA fallback so client-side routes (`/services`, `/about`, etc.) resolve to `index.html`.
+
 ### Frontend (static hosting)
+
+From `FrontEnd/` (how Vercel runs it):
 
 ```sh
 cd FrontEnd
+npm install
+npm run build
+```
+
+Or from repo root (local convenience only):
+
+```sh
 npm run build
 ```
 
 Deploy the `FrontEnd/dist/` directory to any static host:
 
 - Vercel, Netlify, Cloudflare Pages, AWS S3 + CloudFront, etc.
-
-Configure SPA fallback so client-side routes (`/services`, `/about`, etc.) resolve to `index.html`.
 
 ### GitHub Actions (CI/CD)
 
@@ -191,7 +265,7 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 1. Read `AGENTS.md` and `TEAM_INSTRUCTIONS.md` before writing code.
 2. Pick work from `BACKLOGS_v1.md` aligned with the current sprint in `SPRINT_PLAN_v1.md`.
 3. Work on the **shared active branch** only — do not create personal branches unless instructed.
-4. Before every commit: `git pull`, then `npm run lint`, `npm run test`, and `npm run build` (in affected packages).
+4. Before every commit: `git pull`, then from repo root — `npm run lint`, `npm run test`, and `npm run build` (or run the equivalent scripts inside the package you changed).
 5. Keep commits focused; include screenshots for UI changes when reviewing with the team.
 6. Ensure no `.env` files or secrets are included in commits.
 7. Confirm GitHub Actions CI is green after you push.

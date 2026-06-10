@@ -1,0 +1,24 @@
+{
+  "name": "xone-leadgen-webapp",
+  "private": true,
+  "description": "Root scripts for Xone Software Development lead-generation website",
+  "scripts": {
+    "install:all": "npm install --prefix FrontEnd && npm install --prefix BackEnd",
+    "dev": "concurrently -n frontend,backend -c blue,green \"npm run dev --prefix FrontEnd\" \"npm run dev --prefix BackEnd\"",
+    "dev:frontend": "npm run dev --prefix FrontEnd",
+    "dev:backend": "npm run dev --prefix BackEnd",
+    "build": "npm run build --prefix FrontEnd",
+    "preview": "npm run preview --prefix FrontEnd",
+    "start": "npm run start --prefix BackEnd",
+    "lint": "npm run lint --prefix FrontEnd",
+    "test": "npm run test --prefix FrontEnd && npm run test --prefix BackEnd",
+    "test:frontend": "npm run test --prefix FrontEnd",
+    "test:backend": "npm run test --prefix BackEnd"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
