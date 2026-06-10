@@ -59,7 +59,8 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 |----|----------|------|-------|
 | ARCH-01 | P1 | Split `Homepage.tsx` into feature sections | ~830 lines — mission, team, services, CTA |
 | ARCH-02 | P1 | Introduce `src/features/` structure per AGENTS.md | contact, services, home |
-| ARCH-03 | P2 | Shared UI primitives: Button, SectionHeading, Card | Consistent hover/press states |
+| ARCH-03 | P2 | Shared UI primitives: Button, SectionHeading, Card | In progress — shadcn/ui Button, Input, Card, Badge |
+| ARCH-06 | P1 | Migrate interactive UI to shadcn/ui | Done — init + Navbar, Homepage CTAs, route placeholders |
 | ARCH-04 | P2 | Centralize route definitions | `src/routes.tsx` |
 | ARCH-05 | P3 | Add `src/lib/env.ts` for `import.meta.env` access | Single validated entry point |
 

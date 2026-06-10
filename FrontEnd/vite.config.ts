@@ -19,6 +19,7 @@ export default defineConfig({
 });*/
 
 //remobe the autodetect network un comment the lines above for the autodetect network//
+import path from "path";
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
@@ -26,6 +27,11 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   base: process.env.VITE_BASE_PATH ?? "/",
   test: {
     environment: "jsdom",

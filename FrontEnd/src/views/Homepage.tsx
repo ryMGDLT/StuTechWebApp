@@ -1,4 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { PillButton } from "@/components/marketing/pill-button";
+import { LearnMoreButton } from "@/components/marketing/learn-more-button";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   FaCog,
   FaPalette,
@@ -43,9 +48,7 @@ if (remainder !== 0) {
 }
 
 const Homepage: React.FC = () => {
-  const handleButtonClick = (): void => {
-    alert("Button clicked!");
-  };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -118,12 +121,14 @@ const Homepage: React.FC = () => {
             powerful digital experiences.
           </h3>
           <div className="mt-13 flex justify-center items-center">
-            <button
-              className="bg-[#1E3A8A] hover:bg-blue-900 text-white px-8 py-4 rounded-full text-base font-medium cursor-pointer flex items-center"
-              onClick={handleButtonClick}
+            <PillButton
+              size="lg"
+              className="gap-2 px-8 py-4"
+              onClick={() => navigate("/contact")}
             >
-              Talk to our Team <FaArrowRight className="ml-2" />
-            </button>
+              Talk to our Team
+              <FaArrowRight className="ml-2" aria-hidden />
+            </PillButton>
           </div>
         </div>
       </div>
@@ -341,24 +346,8 @@ const Homepage: React.FC = () => {
                     <span>System Integration</span>
                   </li>
                 </ul>
-                <div className="items-center text-center flex justify-center">
-                  <button className="relative bottom-0 text-black py-3 px-6 rounded-full flex items-center bg-amber-500">
-                    Learn More
-                    <svg
-                      className="ml-2 w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </button>
+                <div className="flex items-center justify-center text-center">
+                  <LearnMoreButton className="relative bottom-0 bg-amber-500 text-foreground hover:bg-amber-600" />
                 </div>
               </div>
             </div>
@@ -389,24 +378,8 @@ const Homepage: React.FC = () => {
                     <span>Prototyping</span>
                   </li>
                 </ul>
-                <div className="mt-auto items-center text-center flex justify-center relative -bottom-6">
-                  <button className="bg-blue-800 text-black py-3 px-6 rounded-full flex items-center hover:bg-blue-900 transition-colors">
-                    Learn More
-                    <svg
-                      className="ml-2 w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </button>
+                <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
+                  <LearnMoreButton className="bg-blue-800 text-white hover:bg-blue-900" />
                 </div>
               </div>
             </div>
@@ -437,24 +410,8 @@ const Homepage: React.FC = () => {
                     <span>Performance Optimization</span>
                   </li>
                 </ul>
-                <div className="mt-auto items-center text-center flex justify-center relative -bottom-6">
-                  <button className="bg-blue-800 text-black py-3 px-6 rounded-full flex items-center hover:bg-blue-900 transition-colors">
-                    Learn More
-                    <svg
-                      className="ml-2 w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </button>
+                <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
+                  <LearnMoreButton className="bg-blue-800 text-white hover:bg-blue-900" />
                 </div>
               </div>
             </div>
@@ -485,24 +442,8 @@ const Homepage: React.FC = () => {
                     <span>App Store Optimization</span>
                   </li>
                 </ul>
-                <div className="mt-auto items-center text-center flex justify-center relative -bottom-6">
-                  <button className="bg-red-500 text-black py-3 px-6 rounded-full flex items-center hover:bg-blue-900 transition-colors">
-                    Learn More
-                    <svg
-                      className="ml-2 w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5l7 7-7 7"
-                      ></path>
-                    </svg>
-                  </button>
+                <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
+                  <LearnMoreButton className="bg-red-500 text-white hover:bg-red-600" />
                 </div>
               </div>
             </div>
@@ -745,15 +686,20 @@ const Homepage: React.FC = () => {
             Ready to transform your ideas into powerful digital solutions? Get
             in touch with us today.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8 shadow-lg bg-white p-1 rounded-lg">
-            <input
+          <div className="mx-auto mb-8 flex max-w-md flex-col gap-2 rounded-lg bg-white p-2 shadow-lg sm:flex-row sm:items-center">
+            <Input
               type="email"
               placeholder="What's your work email?"
-              className="flex-1 px-4 py-3 focus:outline-none bg-white"
+              className="h-11 flex-1 border-0 bg-white px-4 shadow-none focus-visible:ring-0"
+              aria-label="Work email"
             />
-            <button className="bg-[#1E3A8A] hover:bg-blue-800 text-black px-6 py-3 rounded-lg font-semibold transition-colors">
+            <Button
+              size="lg"
+              className="h-11 px-6 font-semibold"
+              onClick={() => navigate("/get-started")}
+            >
               Get started
-            </button>
+            </Button>
           </div>
           <p className="text-sm text-gray-500">
             <em>Your email is safe with us — we only send what matters.</em>

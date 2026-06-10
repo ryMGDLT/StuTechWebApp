@@ -104,6 +104,7 @@ All team members must read and follow `AGENTS.md`. This document defines **who d
 - Mobile-first responsive layouts
 - Organize code into `features/` modules; reduce `Homepage.tsx` monolith
 - Place static assets in `FrontEnd/public/assets/`
+- Use **shadcn/ui** primitives from `src/components/ui/`; add new ones with `npx shadcn@latest add <component>`. Put brand-specific wrappers in `src/components/marketing/`
 
 **Workflow**
 

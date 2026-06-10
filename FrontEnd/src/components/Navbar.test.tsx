@@ -14,5 +14,6 @@ describe("Navbar", () => {
     expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /services/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /contact/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /get started/i })).toBeInTheDocument();
   });
 });

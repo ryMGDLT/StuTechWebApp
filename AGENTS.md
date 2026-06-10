@@ -7,6 +7,7 @@ This file defines the non-negotiable engineering rules for this project. It is i
 - **Frontend framework:** React 19 with Vite 7 (SPA, not Next.js)
 - **Language:** TypeScript with `strict: true`
 - **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`
+- **UI components:** shadcn/ui (`src/components/ui/`) — add via `npx shadcn@latest add <component>`
 - **Routing:** React Router DOM v7
 - **Architecture:** Feature-based foldering within `FrontEnd/src/`
 - **Backend (optional):** Express 5 in `BackEnd/` for future API endpoints (contact forms, webhooks)
@@ -35,7 +36,9 @@ StuTechWebApp/
   FrontEnd/
     public/              # Static assets (images, favicon, robots.txt)
     src/
-      components/        # Shared UI (Navbar, Footer, Button)
+      components/        # Shared UI (Navbar, Footer, marketing wrappers)
+        ui/              # shadcn/ui primitives (Button, Input, Card, …)
+        marketing/       # Brand-styled wrappers built on ui/
       views/             # Route-level pages (migrate to features/ over time)
       features/          # Feature modules (contact, services, about, etc.)
         contact/

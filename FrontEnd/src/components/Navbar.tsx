@@ -1,71 +1,56 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  cn(
+    "px-10 py-2 text-base font-medium transition-colors",
+    isActive
+      ? "text-primary"
+      : "text-gray-900 hover:text-primary",
+  );
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm w-full">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-sm">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-10">
+        <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <NavLink to="/home" className="flex items-center gap-6">
-              <img 
-                src="/assets/images/Logo.png" 
-                alt="StuTech Logo" 
-                className="h-10 w-auto ml-20" 
+              <img
+                src="/assets/images/Logo.png"
+                alt="Xone Software Development logo"
+                className="ml-20 h-10 w-auto"
               />
-              <span className="text-blue-700 font-bold text-xl">StuTech</span>
+              <span className="text-primary text-xl font-bold">Xone</span>
             </NavLink>
           </div>
-          
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center justify-center flex-1 ml-2 fixed left-1/2 transform -translate-x-1/2">
-            <NavLink 
-              to="/home" 
-              className={({ isActive }) => 
-                `px-10 py-2 text-base font-medium ${isActive ? 'text-blue-700' : 'text-gray-900 hover:text-blue-700'}`
-              }
-            >
+
+          <div className="fixed left-1/2 ml-2 hidden flex-1 -translate-x-1/2 transform items-center justify-center md:flex">
+            <NavLink to="/home" className={navLinkClass}>
               Home
             </NavLink>
-            <NavLink 
-              to="/services" 
-              className={({ isActive }) => 
-                `px-10 py-2 text-base font-medium ${isActive ? 'text-blue-700' : 'text-gray-900 hover:text-blue-700'}`
-              }
-            >
+            <NavLink to="/services" className={navLinkClass}>
               Services
             </NavLink>
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => 
-                `px-10 py-2 text-base font-medium ${isActive ? 'text-blue-700' : 'text-gray-900 hover:text-blue-700'}`
-              }
-            >
+            <NavLink to="/about" className={navLinkClass}>
               About
             </NavLink>
-            <NavLink 
-              to="/process" 
-              className={({ isActive }) => 
-                `px-10 py-2 text-base font-medium ${isActive ? 'text-blue-700' : 'text-gray-900 hover:text-blue-700'}`
-              }
-            >
+            <NavLink to="/process" className={navLinkClass}>
               Process
             </NavLink>
-            <NavLink 
-              to="/contact" 
-              className={({ isActive }) => 
-                `px-10 py-2 text-base font-medium ${isActive ? 'text-blue-700' : 'text-gray-900 hover:text-blue-700'}`
-              }
-            >
+            <NavLink to="/contact" className={navLinkClass}>
               Contact
             </NavLink>
           </div>
-          
-          {/* Get Started Button */}
+
           <div>
-            <NavLink 
-              to="/get-started" 
-              className="bg-[#1E3A8A] hover:bg-blue-900 text-white px-8 mr-22 py-2 rounded-full text-sm font-medium"
+            <NavLink
+              to="/get-started"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "mr-22 rounded-full px-8 py-2 text-sm",
+              )}
             >
               Get Started
             </NavLink>

@@ -11,7 +11,7 @@ Static marketing website for **Xone Software Development**, built to attract pro
 | Frontend | React 19, Vite 7, TypeScript (strict) |
 | Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
 | Routing | React Router DOM v7 |
-| UI | Swiper, React Icons |
+| UI | shadcn/ui, Swiper, React Icons, Lucide |
 | Backend | Express 5 (optional stub for future APIs) |
 | Database | None (static site v1) |
 
@@ -114,6 +114,7 @@ Runs at [http://localhost:5000](http://localhost:5000). Currently serves only a 
 |---------|----------|-------------|
 | `npm run build` | FrontEnd | Production build to `dist/` |
 | `npm run preview` | FrontEnd | Preview production build locally |
+| `npx shadcn@latest add <name>` | FrontEnd | Add a shadcn/ui component to `src/components/ui/` |
 | `npm run lint` | FrontEnd | Run ESLint (TypeScript + React) |
 | `npm run test` | FrontEnd | Run Vitest unit tests |
 | `npm run test` | BackEnd | Run Node test runner |
