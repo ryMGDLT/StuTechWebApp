@@ -1,0 +1,12 @@
+node_modules
+dist
+
+# Environment files (secrets)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
