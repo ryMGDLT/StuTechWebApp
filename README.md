@@ -114,7 +114,9 @@ Runs at [http://localhost:5000](http://localhost:5000). Currently serves only a 
 |---------|----------|-------------|
 | `npm run build` | FrontEnd | Production build to `dist/` |
 | `npm run preview` | FrontEnd | Preview production build locally |
-| `npm run lint` | FrontEnd | Run ESLint |
+| `npm run lint` | FrontEnd | Run ESLint (TypeScript + React) |
+| `npm run test` | FrontEnd | Run Vitest unit tests |
+| `npm run test` | BackEnd | Run Node test runner |
 
 ## Environment Variables
 
@@ -156,6 +158,17 @@ Deploy the `FrontEnd/dist/` directory to any static host:
 
 Configure SPA fallback so client-side routes (`/services`, `/about`, etc.) resolve to `index.html`.
 
+### GitHub Actions (CI/CD)
+
+| Workflow | File | Purpose |
+|----------|------|---------|
+| CI | `.github/workflows/ci.yml` | Lint, test, and build on every push/PR |
+| CD | `.github/workflows/cd.yml` | Deploy `FrontEnd/dist/` to GitHub Pages on `main` |
+
+**Enable GitHub Pages:** Repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+If the site is served from a subpath (e.g. `https://user.github.io/repo-name/`), set repository variable `VITE_BASE_PATH` to `/repo-name/` (with trailing slash).
+
 ### Backend (when APIs are added)
 
 Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set environment variables in the host dashboard, not in the repository.
@@ -174,13 +187,13 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 
 ## Contributing
 
-1. Read `AGENTS.md` before writing code.
-2. Read your role section in `TEAM_INSTRUCTIONS.md`.
-3. Pick work from `BACKLOGS_v1.md` aligned with the current sprint in `SPRINT_PLAN_v1.md`.
-4. Create a feature branch from `main`.
-5. Keep PRs focused; include screenshots for UI changes.
-6. Run `npm run lint` and `npm run build` in `FrontEnd/` before opening a PR.
-7. Ensure no `.env` files or secrets are included in commits.
+1. Read `AGENTS.md` and `TEAM_INSTRUCTIONS.md` before writing code.
+2. Pick work from `BACKLOGS_v1.md` aligned with the current sprint in `SPRINT_PLAN_v1.md`.
+3. Work on the **shared active branch** only — do not create personal branches unless instructed.
+4. Before every commit: `git pull`, then `npm run lint`, `npm run test`, and `npm run build` (in affected packages).
+5. Keep commits focused; include screenshots for UI changes when reviewing with the team.
+6. Ensure no `.env` files or secrets are included in commits.
+7. Confirm GitHub Actions CI is green after you push.
 
 ### Code standards summary
 
@@ -206,11 +219,9 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 
 See `BACKLOGS_v1.md` for the full list. Highlights:
 
-- `Main.tsx` imports missing `index.css` (Tailwind loaded via `App.css`)
 - Static images under `/assets/images/` are not yet in `public/`
 - UI still shows legacy "StuTech" branding in places
 - Five routes are placeholder stubs
-- `FrontEnd/.env` should be gitignored
 
 ## License
 

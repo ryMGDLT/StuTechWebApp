@@ -219,6 +219,18 @@ Apply when API endpoints are implemented.
 - Add integration tests for API routes when the backend is implemented.
 - Add visual or E2E smoke tests for critical user flows (navigation, contact form).
 - Test failure paths, not only happy paths.
+- Frontend uses **Vitest** (`npm run test` in `FrontEnd/`). Backend uses **Node test runner** (`npm run test` in `BackEnd/`) until a shared runner is adopted.
+
+## CI/CD Rules
+
+GitHub Actions enforce quality on every push and pull request. Read `TEAM_INSTRUCTIONS.md` before changing workflows.
+
+- **CI** (`.github/workflows/ci.yml`): `FrontEnd` — lint, unit tests, production build; `BackEnd` — unit tests.
+- **CD** (`.github/workflows/cd.yml`): builds and deploys `FrontEnd/dist/` to GitHub Pages on `main` (enable Pages in repo settings).
+- Never store secrets, tokens, or `.env` values in workflow files or logs. Use GitHub repository secrets/variables only.
+- CI must pass before merging or deploying. Do not disable checks to unblock without Tech Lead approval.
+- Keep workflows minimal and fast. Add jobs only when they map to a real script in `package.json`.
+- If hosting is not GitHub Pages, CD can be replaced later; CI remains the source of truth for lint/test/build.
 
 ## Review Checklist
 
@@ -233,8 +245,12 @@ Before merging, verify all of the following:
 - Brand and copy consistent with **Xone Software Development**
 - Images and assets exist under `FrontEnd/public/` with correct paths
 - No `console.log` of user PII in production code
+- GitHub Actions CI passes (lint, test, build)
+- Workflow changes reviewed by Tech Lead or Fullstack Developer
 
 ## Agent Instruction
+
+When modifying this project, read `AGENTS.md` and `TEAM_INSTRUCTIONS.md` first.
 
 When modifying this project:
 

@@ -26,6 +26,12 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: process.env.VITE_BASE_PATH ?? "/",
+  test: {
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
+    globals: true,
+  },
   server: {
     host: 'localhost', 
     port: 3000,

@@ -4,6 +4,8 @@ Role-based instructions for the Xone Software Development lead-generation websit
 
 All team members must read and follow `AGENTS.md`. This document defines **who does what**, not **how to code** (that lives in AGENTS.md and README.md).
 
+**Before any task or commit:** read `AGENTS.md` and this file first. Local checks (`npm run lint`, `npm run test`, `npm run build`) must match what GitHub Actions runs in `.github/workflows/ci.yml`.
+
 ---
 
 ## Senior Roles
@@ -48,7 +50,8 @@ All team members must read and follow `AGENTS.md`. This document defines **who d
 
 **Responsibilities**
 
-- Cross-cutting setup: monorepo scripts, env examples, Vite proxy, CI skeleton
+- Cross-cutting setup: monorepo scripts, env examples, Vite proxy, **GitHub Actions CI/CD**
+- Own `.github/workflows/` changes; keep CI aligned with `package.json` scripts
 - Integrate frontend contact forms with backend API when ready
 - Own `README.md` accuracy and local dev ergonomics
 - Bridge frontend feature modules with backend routes and DTOs
@@ -138,6 +141,7 @@ All team members must read and follow `AGENTS.md`. This document defines **who d
 3. Test failure paths: empty form, invalid email, network error on submit
 4. Confirm no console errors on primary routes
 5. Block release if secrets appear in built JS bundle or `.env` is committed
+6. Confirm GitHub Actions CI is green on the shared active branch before sign-off
 
 **Test priorities (Preparation phase)**
 
@@ -210,6 +214,25 @@ Each teammate commits their own work to the **shared active branch** — not to 
 - [ ] Mobile layout checked
 - [ ] No secrets in client bundle
 - [ ] README or team docs updated if setup changed
+
+### CI/CD (GitHub Actions)
+
+| Workflow | Trigger | What it runs |
+|----------|---------|--------------|
+| `ci.yml` | Every push and pull request | `FrontEnd`: lint → test → build · `BackEnd`: test |
+| `cd.yml` | Push to `main` (manual dispatch optional) | Same checks, then deploy `FrontEnd/dist/` to GitHub Pages |
+
+**Roles**
+
+| Role | CI/CD responsibility |
+|------|----------------------|
+| **Fullstack** | Maintain workflows; add jobs when new scripts exist; configure `VITE_BASE_PATH` repo variable for non-root Pages URLs |
+| **Tech Lead** | Approve workflow or security changes; no secrets in YAML |
+| **Frontend / Backend** | Ensure new features include tests so CI stays green |
+| **QA** | Treat a red CI check as a release blocker; verify CD only after CI passes on `main` |
+| **PM** | Track CI/CD backlog items in `BACKLOGS_v1.md`; no direct workflow edits unless coordinating with Fullstack |
+
+**Example commit messages:** `ci: add frontend test job` · `ci: fix lint step for TypeScript` · `chore: enable GitHub Pages deploy`
 
 ### Communication
 

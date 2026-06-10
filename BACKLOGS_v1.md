@@ -15,11 +15,12 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 |----|----------|------|-------|
 | FND-01 | P0 | Add root and FrontEnd `.gitignore` entries for `.env`, `node_modules`, `dist` | `FrontEnd/.env` currently not ignored |
 | FND-02 | P0 | Create `FrontEnd/.env.example` with safe placeholders | Document `VITE_API_BASE_URL` only |
-| FND-03 | P0 | Fix `Main.tsx` CSS import (`index.css` missing) | Consolidate Tailwind entry in one file |
+| FND-03 | P0 | Fix `Main.tsx` CSS import (`index.css` missing) | Done — `index.css` is Tailwind entry |
 | FND-04 | P1 | Remove `BackEnd/node_modules` from git tracking | Add `BackEnd/.gitignore` |
 | FND-05 | P1 | Add root-level dev scripts or document two-terminal workflow | See README |
-| FND-06 | P2 | Add CI workflow: lint + build on PR | GitHub Actions or equivalent |
-| FND-07 | P2 | Configure ESLint for TypeScript files | Currently only `*.{js,jsx}` |
+| FND-06 | P2 | Add CI workflow: lint + build on PR | Done — `.github/workflows/ci.yml` + `cd.yml` |
+| FND-07 | P2 | Configure ESLint for TypeScript files | Done — `typescript-eslint` for `*.{ts,tsx}` |
+| FND-08 | P1 | Add Vitest to FrontEnd; `npm run test` in CI | Done — Navbar smoke test |
 
 ---
 

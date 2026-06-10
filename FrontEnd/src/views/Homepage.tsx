@@ -20,8 +20,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-interface HomepageProps {}
-
 const teamMembers = [
   { name: "John Smith", role: "Company CEO", image: "/path-to-john-smith-image.jpg" },
   { name: "David Johnson", role: "Co-Founder", image: "/path-to-david-johnson-image.jpg" },
@@ -32,8 +30,7 @@ const teamMembers = [
   { name: "Anna Taylor", role: "Product Manager", image: "/path-to-anna-taylor-image.jpg" },
   { name: "Chris Lee", role: "QA Engineer", image: "/path-to-chris-lee-image.jpg" },
 ];
-const slidesPerGroupLarge = 5; 
-const slidesPerGroupSmall = 1; 
+const slidesPerGroupLarge = 5;
 const remainder = teamMembers.length % slidesPerGroupLarge;
 let paddedTeamMembers = [...teamMembers];
 
@@ -45,7 +42,7 @@ if (remainder !== 0) {
   paddedTeamMembers = [...teamMembers, ...additionalSlides];
 }
 
-const Homepage: React.FC<HomepageProps> = () => {
+const Homepage: React.FC = () => {
   const handleButtonClick = (): void => {
     alert("Button clicked!");
   };

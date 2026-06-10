@@ -27,6 +27,7 @@ There is no authenticated user area, product dashboard, or database in the curre
 | Brand rebrand | Not started — UI still shows "StuTech" |
 | Static assets | Missing — `public/assets/` images referenced but not present |
 | Documentation | AGENTS.md updated; README and team docs created |
+| CI/CD | GitHub Actions — lint, test, build on push/PR; Pages deploy on `main` |
 
 **Phase:** Preparation
 
