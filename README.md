@@ -294,8 +294,8 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 
 See `BACKLOGS_v1.md` for the full list. Highlights:
 
-- Static images under `/assets/images/` are not yet in `public/`
-- UI still shows legacy "StuTech" branding in places
+- Brand assets live in `FrontEnd/public/assets/XONE/` (commit to git)
+- Legacy decorative images under `/assets/images/` may still 404 until replaced
 - Five routes are placeholder stubs
 
 ## License

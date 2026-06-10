@@ -1,28 +1,30 @@
 import { NavLink } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
+import { brandAssets, BRAND_NAME } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn(
     "px-10 py-2 text-base font-medium transition-colors",
     isActive
-      ? "text-primary"
-      : "text-gray-900 hover:text-primary",
+      ? "text-xone-violet"
+      : "text-foreground hover:text-xone-violet",
   );
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-border bg-background/95 shadow-sm backdrop-blur-sm">
       <div className="mx-auto w-full px-4 sm:px-6 lg:px-10">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <NavLink to="/home" className="flex items-center gap-6">
+            <NavLink to="/home" className="flex items-center gap-3 sm:gap-4">
               <img
-                src="/assets/images/Logo.png"
-                alt="Xone Software Development logo"
-                className="ml-20 h-10 w-auto"
+                src={brandAssets.logo}
+                alt={BRAND_NAME}
+                className="h-9 w-auto max-w-[160px] sm:h-10 sm:max-w-[200px]"
+                width={200}
+                height={40}
               />
-              <span className="text-primary text-xl font-bold">Xone</span>
             </NavLink>
           </div>
 
@@ -49,7 +51,7 @@ const Navbar = () => {
               to="/get-started"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "mr-22 rounded-full px-8 py-2 text-sm",
+                "mr-2 rounded-full px-6 py-2 text-sm sm:mr-4 sm:px-8",
               )}
             >
               Get Started

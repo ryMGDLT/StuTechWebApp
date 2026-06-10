@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { brandAssets, BRAND_SHORT } from "@/lib/brand";
 import { PillButton } from "@/components/marketing/pill-button";
 import { LearnMoreButton } from "@/components/marketing/learn-more-button";
 import { Button } from "@/components/ui/button";
@@ -52,7 +53,7 @@ const Homepage: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-[95vh] w-full py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#F3F4F6] via-[#2563EB88] to-[#1E3A8A] relative">
+      <div className="relative min-h-[95vh] w-full bg-xone-hero-gradient px-4 py-16 sm:px-6 lg:px-8">
         <img
           src="/assets/images/shape1.png"
           alt="Upper right decoration"
@@ -83,47 +84,42 @@ const Homepage: React.FC = () => {
             WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.4))",
           }}
         />
-        <div className="max-w-7xl mx-auto text-center mt-20">
+        <div className="mx-auto mt-20 max-w-7xl text-center">
           <h1
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="text-8xl font-extrabold text-gray-900 mb-6"
+            className="mb-6 text-4xl font-extrabold text-white sm:text-6xl lg:text-8xl"
           >
             We design and build
           </h1>
           <h2
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="text-8xl font-bold text-[#1e3a8a] mb-6"
+            className="mb-6 text-4xl font-bold text-xone-cyan sm:text-6xl lg:text-8xl"
           >
             digital solutions
           </h2>
           <h2
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="text-8xl font-bold text-gray-900 mb-13"
+            className="mb-13 text-4xl font-bold text-white sm:text-6xl lg:text-8xl"
           >
             that power growth
           </h2>
           <h3
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="font-medium text-2xl text-gray-900"
+            className="text-xl font-medium text-xone-light sm:text-2xl"
           >
             From UI/UX to full-scale systems, we deliver modern applications
           </h3>
           <h3
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="font-medium text-2xl text-gray-900 mt-2"
+            className="mt-2 text-xl font-medium text-xone-light/90 sm:text-2xl"
           >
             tailored to your business needs. Transform your ideas into
           </h3>
           <h3
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="font-medium text-2xl text-gray-900 mt-2"
+            className="mt-2 text-xl font-medium text-xone-light/90 sm:text-2xl"
           >
             powerful digital experiences.
           </h3>
-          <div className="mt-13 flex justify-center items-center">
+          <div className="mt-13 flex items-center justify-center">
             <PillButton
               size="lg"
-              className="gap-2 px-8 py-4"
+              variant="secondary"
+              className="gap-2 bg-white px-8 py-4 text-xone-navy hover:bg-xone-light"
               onClick={() => navigate("/contact")}
             >
               Talk to our Team
@@ -134,30 +130,28 @@ const Homepage: React.FC = () => {
       </div>
 
       {/* Our Mission */}
-      <div className="min-h-[110vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#FFFFFF88] to-[#BDCBFD] relative">
+      <div className="relative min-h-[110vh] min-w-[100vw] bg-xone-section-gradient px-4 py-16 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center mt-3">
           <h3
-            style={{ fontFamily: "Poppins, sans-serif" }}
-            className="font-semibold text-5xl text-gray-900 mt-3"
+            className="mt-3 text-3xl font-semibold text-foreground sm:text-5xl"
           >
             Who We Are
           </h3>
           <p
-            style={{ fontFamily: "Poppins, sans-serif", lineHeight: "1.5" }}
-            className="font-medium text-2xl justify-center items-center mt-8 text-gray-900"
+            className="mt-8 flex items-center justify-center text-lg font-medium leading-relaxed text-muted-foreground sm:text-2xl"
           >
             We are a forward-thinking startup dedicated to system generation,
             UI/UX design, and web & mobile <br />
             application development. At{" "}
-            <span style={{ color: "#1E3A8A" }} className="font-extrabold">
-              StuTech
+            <span className="font-extrabold text-xone-violet">
+              {BRAND_SHORT}
             </span>
             , we believe technology should not only be powerful but also <br />
             simple, accessible, and designed with users in mind. Our goal is to
             empower businesses and <br />
             individuals with digital solutions that truly make life easier.
           </p>
-          <div className="p-4 rounded-lg bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] h-150 mt-10 flex gap-4 relative overflow-hidden">
+          <div className="p-4 rounded-lg bg-xone-card shadow-[5px_5px_10px_rgba(0,0,0,0.2)] h-150 mt-10 flex gap-4 relative overflow-hidden">
             <img
               src="/assets/images/upleft.png"
               className="absolute top-[-40px] left-[-85px] w-45 h-45 object-cover rounded-md"
@@ -180,30 +174,27 @@ const Homepage: React.FC = () => {
             />
             <div className="flex-1 p-4 rounded-md text-left">
               <h3
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="font-medium text-3xl mt-2 m-15"
+                className="m-15 mt-2 text-3xl font-medium"
               >
                 Our Mission
               </h3>
               <p
-                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "1.5" }}
-                className="m-15 mt-[-20px] text-justify text-xl tracking-wider"
+                className="m-15 mt-[-20px] text-justify text-xl leading-relaxed tracking-wider"
               >
                 To bridge the gap between innovative technology and exceptional
                 user experiences by creating seamless, reliable, and scalable
                 solutions tailored to real-world needs.
               </p>
               <ul
-                style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2.5" }}
-                className="m-20 mt-[-20px] text-justify text-xl text-[#1E3A8A] list-disc"
+                className="m-20 mt-[-20px] list-disc text-justify text-xl text-xone-violet"
               >
-                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                <li className="text-foreground marker:text-xone-violet">
                   Innovative & user-focused approach
                 </li>
-                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                <li className="text-foreground marker:text-xone-violet">
                   Scalable solutions for growth
                 </li>
-                <li className="text-gray-900 marker:text-[#1E3A8A]">
+                <li className="text-foreground marker:text-xone-violet">
                   End-to-end development expertise
                 </li>
               </ul>
@@ -218,19 +209,17 @@ const Homepage: React.FC = () => {
           </div>
         </div>
 <div
-  className="w-full mx-auto min-h-[850px] pt-10 px-10 mt-25 rounded-lg border-2 drop-shadow-2xl border-white bg-[#D9E5FF76] shadow-[5px_5px_10px_rgba(0,0,0,0.2)] flex justify-center items-center"
+  className="w-full mx-auto min-h-[850px] pt-10 px-10 mt-25 rounded-lg border-2 drop-shadow-2xl border-white bg-xone-card shadow-[5px_5px_10px_rgba(0,0,0,0.2)] flex justify-center items-center"
   style={{ boxShadow: "inset 0 -5px 12px -6px rgba(255, 255, 255, 0.9)" }}
 >
   <div className="text-center mt-[-70px] w-full">
     <h3
-      style={{ fontFamily: "Poppins, sans-serif" }}
-      className="font-semibold text-5xl text-gray-900 mt-5"
+      className="mt-5 text-3xl font-semibold text-foreground sm:text-5xl"
     >
       Meet Our Team
     </h3>
     <p
-      style={{ fontFamily: "Poppins, sans-serif", lineHeight: "2" }}
-      className="mt-5 text-center text-2xl text-gray-900 font-medium mb-15 px-4"
+      className="mb-15 mt-5 px-4 text-center text-lg font-medium leading-relaxed text-muted-foreground sm:text-2xl"
     >
       Comprehensive digital solutions designed to transform your business and accelerate growth
     </p>
@@ -267,25 +256,25 @@ const Homepage: React.FC = () => {
                 alt={member.name}
                 className="w-32 h-32 object-cover rounded-md mb-6"
               />
-              <h4 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h4>
-              <p className="text-gray-600 text-center">{member.role}</p>
+              <h4 className="text-xl font-semibold text-foreground mb-2">{member.name}</h4>
+              <p className="text-center text-muted-foreground">{member.role}</p>
             </div>
           </SwiperSlide>
         ))}
         <div className="swiper-pagination mt-30"></div>
-        <div className="swiper-button-prev text-[#1E3A8A] after:text-2xl"></div>
-        <div className="swiper-button-next text-[#1E3A8A] after:text-2xl"></div>
+        <div className="swiper-button-prev text-xone-violet after:text-2xl"></div>
+        <div className="swiper-button-next text-xone-violet after:text-2xl"></div>
       </Swiper>
       <style>{`
         .swiper-button-prev, .swiper-button-next {
-          color: #1E3A8A;
+          color: #533bda;
           --swiper-navigation-size: 24px;
           padding: 10px;
         }
         .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
-          background-color: #999;
+          background-color: #94a3b8;
           opacity: 0.5;
           transition: width 0.3s ease, background-color 0.3s ease;
         }
@@ -293,7 +282,7 @@ const Homepage: React.FC = () => {
           width: 16px;
           height: 8px;
           border-radius: 8px;
-          background-color: #1E3A8A;
+          background-color: #533bda;
           opacity: 1;
         }
         .swiper-container {
@@ -311,16 +300,16 @@ const Homepage: React.FC = () => {
 </div>
       </div>
 
-      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
+      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-xone-section">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">What We Offer</h2>
-          <p className="text-lg text-center text-gray-700 mb-16 max-w-4xl mx-auto">
+          <p className="text-lg text-center text-muted-foreground mb-16 max-w-4xl mx-auto">
             Comprehensive digital solutions designed to transform your business
             and accelerate growth
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
-              <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-accent-muted h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                   <FaCog className="text-3xl" />
@@ -328,31 +317,31 @@ const Homepage: React.FC = () => {
                 <h3 className="text-2xl font-bold text-center mb-2">
                   System Generation & Automation
                 </h3>
-                <p className="text-gray-700 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Streamline your workflows with intelligent automation
                   solutions that boost efficiency and reduce manual tasks.
                 </p>
                 <ul className="mb-8 space-y-3">
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Process Automation</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Workflow Optimization</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>System Integration</span>
                   </li>
                 </ul>
                 <div className="flex items-center justify-center text-center">
-                  <LearnMoreButton className="relative bottom-0 bg-amber-500 text-foreground hover:bg-amber-600" />
+                  <LearnMoreButton className="relative bottom-0 bg-xone-cyan text-xone-navy hover:opacity-90" />
                 </div>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
-              <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-accent-muted h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                   <FaPalette className="text-3xl" />
@@ -360,31 +349,31 @@ const Homepage: React.FC = () => {
                 <h3 className="text-2xl font-bold text-center mb-10">
                   UI/UX Design
                 </h3>
-                <p className="text-gray-700 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Create user-centered, seamless experiences that engage your
                   audience and drive conversions.
                 </p>
                 <ul className="mb-8 space-y-3">
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>User Research</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Interface Design</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Prototyping</span>
                   </li>
                 </ul>
                 <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
-                  <LearnMoreButton className="bg-blue-800 text-white hover:bg-blue-900" />
+                  <LearnMoreButton className="bg-xone-navy text-white hover:bg-xone-gray-dark" />
                 </div>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
-              <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-accent-muted h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                   <FaGlobe className="text-3xl" />
@@ -392,31 +381,31 @@ const Homepage: React.FC = () => {
                 <h3 className="text-2xl font-bold text-center mb-2">
                   Web Application Development
                 </h3>
-                <p className="text-gray-700 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Build scalable, secure, and modern web applications that grow
                   with your business needs.
                 </p>
                 <ul className="mb-8 space-y-3">
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Full-Stack Development</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>API Integration</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Performance Optimization</span>
                   </li>
                 </ul>
                 <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
-                  <LearnMoreButton className="bg-blue-800 text-white hover:bg-blue-900" />
+                  <LearnMoreButton className="bg-xone-navy text-white hover:bg-xone-gray-dark" />
                 </div>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-gray-600">
-              <div className="bg-[#BDCBFD] h-[2vh] rounded-t-2xl"></div>
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[85vh] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-accent-muted h-[2vh] rounded-t-2xl"></div>
               <div className="p-8 h-[98vh]">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
                   <FaMobile className="text-3xl" />
@@ -424,26 +413,26 @@ const Homepage: React.FC = () => {
                 <h3 className="text-2xl font-bold text-center mb-2">
                   Mobile Application Development
                 </h3>
-                <p className="text-gray-700 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Develop cross-platform, engaging mobile apps that provide
                   exceptional user experiences.
                 </p>
                 <ul className="mb-8 space-y-3">
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>iOS & Android</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>Cross-Platform</span>
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-blue-700 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 bg-xone-violet rounded-full mr-2"></div>
                     <span>App Store Optimization</span>
                   </li>
                 </ul>
                 <div className="relative -bottom-6 mt-auto flex items-center justify-center text-center">
-                  <LearnMoreButton className="bg-red-500 text-white hover:bg-red-600" />
+                  <LearnMoreButton className="bg-xone-violet text-white hover:bg-xone-gray-dark" />
                 </div>
               </div>
             </div>
@@ -453,52 +442,52 @@ const Homepage: React.FC = () => {
 
       <hr className="border border-white" />
 
-      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF] mx-auto">
+      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-xone-section mx-auto">
         <div className="max-w-[100vw] mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">Why Choose US</h2>
-          <p className="text-lg text-center text-gray-700 mb-16 max-w-4xl mx-auto">
+          <p className="text-lg text-center text-muted-foreground mb-16 max-w-4xl mx-auto">
             Here's why businesses trust us to bring their ideas to life and
             drive digital transformation
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 mb-8 justify-items-center items-center">
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
-              <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-section h-[2vh] rounded-t-2xl"></div>
+              <div className="p-8 flex flex-col items-center text-center h-full bg-xone-accent-muted">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                  <BsCheckCircle className="text-2xl text-gray-700" />
+                  <BsCheckCircle className="text-2xl text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">
                   Custom-built <br /> Solutions
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-muted-foreground">
                   Tailored applications designed specifically for your business
                   requirements and goals.
                 </p>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
-              <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-section h-[2vh] rounded-t-2xl"></div>
+              <div className="p-8 flex flex-col items-center text-center h-full bg-xone-accent-muted">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                  <BsLightning className="text-2xl text-gray-700" />
+                  <BsLightning className="text-2xl text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">
                   Agile & Scalable Development
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-muted-foreground">
                   Fast, iterative development process that adapts to your needs
                   and scales with growth.
                 </p>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
-              <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-section h-[2vh] rounded-t-2xl"></div>
+              <div className="p-8 flex flex-col items-center text-center h-full bg-xone-accent-muted">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                  <BsPersonCircle className="text-2xl text-gray-700" />
+                  <BsPersonCircle className="text-2xl text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">End-to-end Support</h3>
-                <p className="text-gray-700">
+                <p className="text-muted-foreground">
                   From initial concept to post-launch maintenance, we support you
                   every step of the way.
                 </p>
@@ -506,31 +495,31 @@ const Homepage: React.FC = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto justify-items-center items-center">
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
-              <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-section h-[2vh] rounded-t-2xl"></div>
+              <div className="p-8 flex flex-col items-center text-center h-full bg-xone-accent-muted">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                  <RiRocketLine className="text-2xl text-gray-700" />
+                  <RiRocketLine className="text-2xl text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">
                   Future-ready Technology
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-muted-foreground">
                   Built with modern technologies that ensure your solutions remain
                   relevant and effective.
                 </p>
               </div>
             </div>
-            <div className="bg-blue-50 rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-gray-600">
-              <div className="bg-[#E2EBFF] h-[2vh] rounded-t-2xl"></div>
-              <div className="p-8 flex flex-col items-center text-center h-full bg-[#BDCBFD]">
+            <div className="bg-xone-light rounded-2xl flex flex-col h-[50vh] w-[22vw] shadow-lg shadow-xone-navy/10">
+              <div className="bg-xone-section h-[2vh] rounded-t-2xl"></div>
+              <div className="p-8 flex flex-col items-center text-center h-full bg-xone-accent-muted">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                  <RiUserLine className="text-2xl text-gray-700" />
+                  <RiUserLine className="text-2xl text-muted-foreground" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">
                   User-first Design Approach
                 </h3>
-                <p className="text-gray-700">
+                <p className="text-muted-foreground">
                   Every decision is made with your users in mind, ensuring
                   intuitive and engaging experiences.
                 </p>
@@ -542,62 +531,62 @@ const Homepage: React.FC = () => {
 
       <hr className="border-white" />
 
-      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
+      <div className="min-h-[100vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-xone-section">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">How We Work</h2>
-          <p className="text-lg text-center text-gray-700 mb-16 max-w-4xl mx-auto">
+          <p className="text-lg text-center text-muted-foreground mb-16 max-w-4xl mx-auto">
             Our proven 5-step process ensures successful project delivery from
             concept to completion
           </p>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
             <div className="flex flex-col items-center">
-              <div className="bg-gray-300 w-14 h-14 rounded-full flex items-center justify-center mb-6 relative z-10">
-                <div className="text-blue-700 font-bold text-xl px-3 py-1 rounded-full bg-[#BDCBFD]">
+              <div className="relative z-10 mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-xone-gray-light">
+                <div className="rounded-full bg-xone-accent-muted px-3 py-1 text-xl font-bold text-xone-violet">
                   1
                 </div>
               </div>
               <h3 className="text-xl font-bold mb-3">Determine</h3>
-              <p className="text-center text-gray-700 text-sm">
+              <p className="text-center text-muted-foreground text-sm">
                 Understanding your needs, goals, and target audience through
                 comprehensive research and analysis.
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-6 relative z-10">
-                <span className="text-gray-700 font-bold text-xl">2</span>
+              <div className="bg-white w-14 h-14 rounded-full border-2 border-xone-gray-light flex items-center justify-center mb-6 relative z-10">
+                <span className="text-muted-foreground font-bold text-xl">2</span>
               </div>
               <h3 className="text-xl font-bold mb-3">Design</h3>
-              <p className="text-center text-gray-700 text-sm">
+              <p className="text-center text-muted-foreground text-sm">
                 Creating wireframes, prototypes, and visual designs that align
                 with your brand and user expectations.
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-6 relative z-10">
-                <span className="text-gray-700 font-bold text-xl">3</span>
+              <div className="bg-white w-14 h-14 rounded-full border-2 border-xone-gray-light flex items-center justify-center mb-6 relative z-10">
+                <span className="text-muted-foreground font-bold text-xl">3</span>
               </div>
               <h3 className="text-xl font-bold mb-3">Development</h3>
-              <p className="text-center text-gray-700 text-sm">
+              <p className="text-center text-muted-foreground text-sm">
                 Building robust, scalable applications using modern technologies
                 and best development practices.
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-6 relative z-10">
-                <span className="text-gray-700 font-bold text-xl">4</span>
+              <div className="bg-white w-14 h-14 rounded-full border-2 border-xone-gray-light flex items-center justify-center mb-6 relative z-10">
+                <span className="text-muted-foreground font-bold text-xl">4</span>
               </div>
               <h3 className="text-xl font-bold mb-3">Deployment</h3>
-              <p className="text-center text-gray-700 text-sm">
+              <p className="text-center text-muted-foreground text-sm">
                 Launching your application with proper testing, optimization,
                 and seamless go-live processes.
               </p>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white w-14 h-14 rounded-full border-2 border-gray-200 flex items-center justify-center mb-6 relative z-10">
-                <span className="text-gray-700 font-bold text-xl">5</span>
+              <div className="bg-white w-14 h-14 rounded-full border-2 border-xone-gray-light flex items-center justify-center mb-6 relative z-10">
+                <span className="text-muted-foreground font-bold text-xl">5</span>
               </div>
               <h3 className="text-xl font-bold mb-3">Support</h3>
-              <p className="text-center text-gray-700 text-sm">
+              <p className="text-center text-muted-foreground text-sm">
                 Providing ongoing maintenance, updates, and support to ensure
                 continued success and growth.
               </p>
@@ -623,7 +612,7 @@ const Homepage: React.FC = () => {
               {[...Array(10)].map((_, index) => (
                 <div
                   key={`row2-${index}`}
-                  className={`bg-blue-100/70 rounded-full shadow-md animate-float ${
+                  className={`bg-xone-cyan/30 rounded-full shadow-md animate-float ${
                     index % 2 === 0 ? "w-5 h-5" : "w-7 h-7"
                   }`}
                   style={{ animationDelay: `${index * 0.3}s` }}
@@ -651,7 +640,7 @@ const Homepage: React.FC = () => {
               {[...Array(8)].map((_, index) => (
                 <div
                   key={`row4-${index}`}
-                  className={`bg-blue-50/80 rounded-full shadow-md animate-float ${
+                  className={`bg-xone-light/80 rounded-full shadow-md animate-float ${
                     index % 3 === 0 ? "w-7 h-7" : index % 3 === 1 ? "w-4 h-4" : "w-6 h-6"
                   }`}
                   style={{ animationDelay: `${index * 0.25}s` }}
@@ -677,12 +666,12 @@ const Homepage: React.FC = () => {
 
       <hr className="border-white" />
 
-      <div className="min-h-[60vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-[#E2EBFF]">
+      <div className="min-h-[60vh] min-w-[100vw] py-16 px-4 sm:px-6 lg:px-8 bg-xone-section">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">
+          <h2 className="text-4xl font-bold text-foreground mb-6">
             Let's Build Something Great Together!
           </h2>
-          <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
             Ready to transform your ideas into powerful digital solutions? Get
             in touch with us today.
           </p>
@@ -701,34 +690,37 @@ const Homepage: React.FC = () => {
               Get started
             </Button>
           </div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             <em>Your email is safe with us — we only send what matters.</em>
           </p>
         </div>
       </div>
 
-      <div className="min-w-[100vw] bg-blue-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <div className="min-w-[100vw] bg-xone-navy text-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div className="md:col-span-1">
-              <div className="flex items-center mb-55">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3">
-                  <img src="/assets/images/Logo.png" alt="StuTech Logo" className="h-15 w-auto" />
-                </div>
-                <span className="text-3xl font-bold">StuTech</span>
+              <div className="mb-55 flex items-center">
+                <img
+                  src={brandAssets.logoInverse}
+                  alt="Xone Software Development"
+                  className="h-10 w-auto max-w-[180px] sm:h-12 sm:max-w-[220px]"
+                  width={220}
+                  height={48}
+                />
               </div>
               <div className="flex space-x-4 mb-6">
-                <FaEnvelope className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                <FaLinkedin className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                <FaTwitter className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                <FaInstagram className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                <FaPhone className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
-                <FaGithub className="w-5 h-5 text-gray-300 hover:text-white cursor-pointer transition-colors" />
+                <FaEnvelope className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
+                <FaLinkedin className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
+                <FaTwitter className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
+                <FaInstagram className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
+                <FaPhone className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
+                <FaGithub className="h-5 w-5 cursor-pointer text-xone-gray-light transition-colors hover:text-white" />
               </div>
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Product</h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-xone-gray-light">
                 <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
@@ -740,7 +732,7 @@ const Homepage: React.FC = () => {
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Company</h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-xone-gray-light">
                 <li><a href="#" className="hover:text-white transition-colors">About us</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
@@ -750,7 +742,7 @@ const Homepage: React.FC = () => {
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Resources</h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-xone-gray-light">
                 <li><a href="#" className="hover:text-white transition-colors">Startup Program</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
@@ -762,7 +754,7 @@ const Homepage: React.FC = () => {
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Developers</h3>
-              <ul className="space-y-3 text-gray-300">
+              <ul className="space-y-3 text-xone-gray-light">
                 <li><a href="#" className="hover:text-white transition-colors">API</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">GitHub</a></li>

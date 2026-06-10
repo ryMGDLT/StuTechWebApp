@@ -6,7 +6,8 @@ This file defines the non-negotiable engineering rules for this project. It is i
 
 - **Frontend framework:** React 19 with Vite 7 (SPA, not Next.js)
 - **Language:** TypeScript with `strict: true`
-- **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`
+- **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`; Xone palette tokens in `FrontEnd/src/index.css` and `src/lib/brand.ts`
+- **Typography:** Geist Sans (`@fontsource-variable/geist`) — do not add Poppins/Inter for new UI
 - **UI components:** shadcn/ui (`src/components/ui/`) — add via `npx shadcn@latest add <component>`
 - **Routing:** React Router DOM v7
 - **Architecture:** Feature-based foldering within `FrontEnd/src/`

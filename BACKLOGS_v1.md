@@ -28,11 +28,11 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 
 | ID | Priority | Item | Notes |
 |----|----------|------|-------|
-| BRD-01 | P0 | Rebrand all user-facing copy: StuTech → Xone Software Development | Navbar, footer, homepage, titles |
-| BRD-02 | P0 | Update `index.html` title and meta description | Currently "Vite + React" |
+| BRD-01 | P0 | Rebrand all user-facing copy: StuTech → Xone Software Development | In progress — navbar, footer, mission copy updated |
+| BRD-02 | P0 | Update `index.html` title and meta description | Done — Xone title, description, icon |
 | BRD-03 | P1 | Replace placeholder team members with real or approved stock profiles | Paths like `/path-to-john-smith-image.jpg` are broken |
-| BRD-04 | P1 | Deliver logo and brand assets to `FrontEnd/public/assets/` | Logo.png, shapes, team images referenced in code |
-| BRD-05 | P2 | Define color tokens in Tailwind config | Reduce hardcoded hex in components |
+| BRD-04 | P1 | Deliver logo and brand assets to `FrontEnd/public/assets/` | Done — `public/assets/XONE/xone_brand_kit/` |
+| BRD-05 | P2 | Define color tokens in Tailwind config | Done — Xone palette in `index.css` + `brand.ts` |
 | BRD-06 | P2 | Legal pages: Privacy Policy, Terms of Service | Footer links currently `#` |
 | BRD-07 | P3 | Favicon and Open Graph meta tags | Social sharing for lead gen |
 

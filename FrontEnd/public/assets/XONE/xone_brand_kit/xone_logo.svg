@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="520" height="160">
+  <!-- Hex mark -->
+  <polygon points="80,10 136,42 136,106 80,138 24,106 24,42" fill="#1a1a2e"/>
+  <!-- X inside hex -->
+  <line x1="46" y1="30" x2="114" y2="118" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+  <line x1="114" y1="30" x2="46" y2="118" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+  <!-- Wordmark -->
+  <text x="158" y="112" font-family="'Courier New', Courier, monospace" font-size="88" font-weight="700" fill="#1a1a2e" letter-spacing="-4">xone</text>
+  <!-- Tagline -->
+  <text x="160" y="140" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#999999" letter-spacing="3.5">SOFTWARE DEVELOPMENT</text>
+</svg>
