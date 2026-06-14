@@ -20,22 +20,22 @@ There is no authenticated user area, product dashboard, or database in the curre
 | Services page | **Done** — feature module with shadcn Cards |
 | About page | **Done** — company story and values |
 | Process page | **Done** — expanded 5-step process |
-| Contact page | **Done** — form UI with Zod validation (client-side); API wiring pending |
-| Get Started page | **Done** — lead qualification form with Zod validation |
+| Contact page | **Done** — form UI with Zod validation + `POST /api/contact` wiring |
+| Get Started page | **Done** — lead qualification form with Zod validation + `POST /api/get-started` wiring |
 | Mobile navigation | **Done** — hamburger Sheet menu below `md` breakpoint |
 | Route lazy-loading | **Done** — non-home routes via `React.lazy` |
-| Backend API | Minimal Express stub (`GET /` only) |
+| Backend API | **Done (Week 3)** — `POST /api/contact`, `POST /api/get-started`, `GET /api/health`; rate limiting + CORS |
 | Database | None |
 | Brand rebrand | **Done** — Xone palette, Geist Sans, logo assets, user-facing copy |
 | Static assets | Brand kit under `public/assets/XONE/`; decorative homepage images referenced |
-| Documentation | AGENTS.md, README, team docs, backlog, sprint plan |
+| Documentation | AGENTS.md, README, team docs, backlog, sprint plan (v1 + v2) |
 | CI/CD | GitHub Actions — lint, test, build on push/PR; Pages deploy on `main` |
 | Root `package.json` | Orchestration scripts: `dev`, `build`, `test`, `install:all` |
-| Testing | Vitest — Navbar (incl. mobile menu), pages, schemas, home sections, Footer |
+| Testing | Vitest — pages, schemas, API client; BackEnd — supertest integration tests |
 
-**Phase:** Preparation (Week 2 complete; Sprint 2 next)
+**Phase:** Sprint 2 Week 3 complete; Week 4 (deploy, legal, polish) next
 
-The codebase has a stable dev/build pipeline, Xone branding on all primary surfaces, five marketing routes with real content, mobile navigation, homepage section decomposition, and lazy-loaded routes. Remaining work: contact API, legal pages, `BackEnd/node_modules` git untrack, QA sign-off.
+The codebase has a stable dev/build pipeline, Xone branding on all primary surfaces, five marketing routes with real content, working lead capture API, and form submission end-to-end in local dev. Remaining work: production deploy, legal pages, webhook integration, QA sign-off, `BackEnd/node_modules` git untrack.
 
 ## Tech Summary
 
@@ -45,8 +45,8 @@ The codebase has a stable dev/build pipeline, Xone branding on all primary surfa
 | Typography | Geist Sans (`@fontsource-variable/geist`) |
 | Routing | React Router DOM v7 |
 | UI libraries | shadcn/ui, Swiper, React Icons, Lucide |
-| Validation | Zod (contact form client-side; server-side pending) |
-| Backend | Express 5 (stub only) |
+| Validation | Zod (client + server at API boundary) |
+| Backend | Express 5 — lead capture API (`BackEnd/src/`) |
 | Database | None (appropriate for static lead-gen v1) |
 | Tooling | ESLint 9, Vitest, PostCSS, Autoprefixer |
 
@@ -71,7 +71,7 @@ Role-specific workflows are defined in `TEAM_INSTRUCTIONS.md`.
 1. **Documentation drift** — Original `Technical Documentation` describes a fullstack app with user APIs and PostgreSQL; actual code is a Vite SPA with no DB.
 2. **Decorative homepage images** — Paths like `/assets/images/shape1.png` may 404 until assets are added or paths updated.
 3. **Monolithic homepage** — Resolved (ARCH-01): sections live under `features/home/components/`.
-4. **Contact form** — Client validation only; no `POST /api/contact` yet.
+4. **Contact form** — Resolved (API-04): server-side Zod validation + form wiring.
 5. **Mobile navigation** — Resolved (PG-07): Sheet hamburger menu below `md`.
 6. **BackEnd/node_modules in git index** — `.gitignore` in place; run `git rm -r --cached BackEnd/node_modules` to untrack.
 7. **`.env` hygiene** — `.env` is gitignored; if previously tracked, run `git rm --cached FrontEnd/.env` locally.
@@ -93,4 +93,5 @@ Role-specific workflows are defined in `TEAM_INSTRUCTIONS.md`.
 - `TEAM_INSTRUCTIONS.md` — Role-based responsibilities
 - `BACKLOGS_v1.md` — Prioritized backlog
 - `SPRINT_PLAN_v1.md` — Preparation phase sprint plan
+- `SPRINT_PLAN_v2.md` — Sprint 2 plan (lead capture + deploy)
 - `Technical Documentation` — Read-only legacy reference (do not modify)

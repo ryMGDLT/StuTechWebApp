@@ -12,7 +12,7 @@ Static marketing website for **Xone Software Development**, built to attract pro
 | Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
 | Routing | React Router DOM v7 |
 | UI | shadcn/ui, Swiper, React Icons, Lucide |
-| Backend | Express 5 (optional stub for future APIs) |
+| Backend | Express 5 (lead capture API) |
 | Database | None (static site v1) |
 
 ## Project Structure
@@ -30,14 +30,17 @@ StuTechWebApp/
 │   ├── index.html
 │   ├── vite.config.ts
 │   └── package.json
-├── BackEnd/                  # Express API (future lead capture)
-│   └── server.js             # JavaScript entry (use node / nodemon)
+├── BackEnd/                  # Express API (lead capture)
+│   ├── src/                  # Routes, schemas, services, middleware
+│   ├── server.js             # Entry point (starts Express app)
+│   └── .env.example          # PORT, CORS_ORIGIN, RATE_LIMIT_*
 ├── package.json              # Root scripts: dev, build, test, start
 ├── AGENTS.md                 # Engineering rules (required reading)
 ├── PROJECT_OVERVIEW.md       # PM executive summary
 ├── TEAM_INSTRUCTIONS.md      # Role-based workflows
 ├── BACKLOGS_v1.md            # Prioritized backlog
-└── SPRINT_PLAN_v1.md         # Preparation phase sprint plan
+├── SPRINT_PLAN_v1.md         # Preparation phase sprint plan
+└── SPRINT_PLAN_v2.md         # Sprint 2 plan (lead capture + deploy)
 ```
 
 The frontend follows a **feature-based architecture** documented in `AGENTS.md`. Marketing routes live under `src/features/`; the homepage orchestrates section components from `features/home/components/`.
@@ -69,16 +72,30 @@ This installs root orchestration tools plus `FrontEnd/` and `BackEnd/` packages.
 
 ### 3. Configure environment variables
 
+**Frontend** (`FrontEnd/.env`):
+
 ```sh
 cd FrontEnd
 cp .env.example .env
 ```
 
-Edit `.env` with local values. Only `VITE_*` variables are exposed to the browser.
+**Backend** (`BackEnd/.env`):
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_API_BASE_URL` | No (v1) | Backend API base URL for future contact form (e.g. `http://localhost:5000`) |
+```sh
+cd BackEnd
+cp .env.example .env
+```
+
+Edit `.env` files with local values. Only `VITE_*` variables are exposed to the browser.
+
+| Variable | Package | Required | Description |
+|----------|---------|----------|-------------|
+| `VITE_API_BASE_URL` | FrontEnd | No | API origin for production. Leave empty in local dev to use Vite proxy (`/api` → `localhost:5000`) |
+| `PORT` | BackEnd | No (default 5000) | Express listen port |
+| `CORS_ORIGIN` | BackEnd | No (default `http://localhost:3000`) | Comma-separated allowed browser origins |
+| `RATE_LIMIT_WINDOW_MS` | BackEnd | No (default 900000) | Rate limit window in ms (15 min) |
+| `RATE_LIMIT_MAX` | BackEnd | No (default 10) | Max requests per IP per window on lead endpoints |
+| `CONTACT_WEBHOOK_URL` | BackEnd | No | Optional webhook for lead delivery (Week 4) |
 
 **Never commit `.env` files.** Secrets must not use the `VITE_` prefix.
 
@@ -155,7 +172,19 @@ npm run test:backend     # Node test runner only
 | `test:frontend` | `npm run test --prefix FrontEnd` → `vitest run` |
 | `test:backend` | `npm run test --prefix BackEnd` → `node --test tests/smoke.test.js` |
 
-The Vite config proxies `/api` requests to `http://localhost:5000` for local API development.
+The Vite config proxies `/api` requests to `http://localhost:5000` (no path rewrite — backend routes use `/api/*` prefix).
+
+**Local dev (recommended):** from repo root, run both servers together:
+
+```sh
+npm run dev
+```
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5000
+- Forms POST to `/api/contact` and `/api/get-started` via the Vite proxy
+
+**Alternative:** two terminals — `npm run dev:frontend` and `npm run dev:backend`.
 
 ### Per-package (when you only changed one side)
 
@@ -178,23 +207,69 @@ The Vite config proxies `/api` requests to `http://localhost:5000` for local API
 Client-safe variables only:
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+# Leave empty for Vite dev proxy; set full origin in production
+VITE_API_BASE_URL=
 ```
 
-Access via a centralized module (recommended: `src/lib/env.ts`):
+Access via `src/lib/env.ts`:
 
 ```ts
-export const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "";
+import { buildApiUrl } from "@/lib/env";
+// buildApiUrl("/api/contact") → "/api/contact" (dev) or "https://api.example.com/api/contact" (prod)
 ```
 
-### Backend (`BackEnd/.env`) — future use
+### Backend (`BackEnd/.env`)
 
 Server-only secrets (no `VITE_` prefix):
 
 ```env
 PORT=5000
-CONTACT_WEBHOOK_URL=
+CORS_ORIGIN=http://localhost:3000
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX=10
+# CONTACT_WEBHOOK_URL=https://example.com/webhook
 ```
+
+## API Endpoints
+
+Base URL: `http://localhost:5000` (local) or your deployed API origin.
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/api/health` | Health check for deploy monitoring |
+| `POST` | `/api/contact` | Contact form submission (name, email, message, optional company) |
+| `POST` | `/api/get-started` | Get Started form (name, email, projectType, timeline, description) |
+
+**Success response (201):**
+
+```json
+{
+  "success": true,
+  "message": "Thanks for reaching out...",
+  "data": { "id": "contact-...", "receivedAt": "2026-06-14T00:00:00.000Z" }
+}
+```
+
+**Validation error (400):**
+
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": { "email": "Enter a valid email address" }
+}
+```
+
+**Rate limit (429):**
+
+```json
+{
+  "success": false,
+  "message": "Too many requests. Please try again later."
+}
+```
+
+Lead endpoints are rate-limited (default: 10 requests per 15 minutes per IP). All input is validated server-side with Zod before processing.
 
 ## Build and Deploy
 
@@ -245,9 +320,13 @@ Deploy the `FrontEnd/dist/` directory to any static host:
 
 If the site is served from a subpath (e.g. `https://user.github.io/repo-name/`), set repository variable `VITE_BASE_PATH` to `/repo-name/` (with trailing slash).
 
-### Backend (when APIs are added)
+### Backend (API)
 
 Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set environment variables in the host dashboard, not in the repository.
+
+- Health check: `GET /api/health`
+- Set `CORS_ORIGIN` to your production FrontEnd origin(s)
+- Set `VITE_API_BASE_URL` on the FrontEnd host to the deployed API origin
 
 ## Routes
 
@@ -257,8 +336,8 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 | `/services` | Services page — `features/services/` |
 | `/about` | About page — `features/about/` |
 | `/process` | Process page — `features/process/` |
-| `/contact` | Contact page — `features/contact/` (form UI; API pending) |
-| `/get-started` | Get Started page — `features/get-started/` (lead qualification) |
+| `/contact` | Contact page — `features/contact/` (form → `POST /api/contact`) |
+| `/get-started` | Get Started page — `features/get-started/` (form → `POST /api/get-started`) |
 | `*` | Falls back to homepage |
 
 Non-home routes are lazy-loaded via `React.lazy` in `App.tsx`.
@@ -266,7 +345,7 @@ Non-home routes are lazy-loaded via `React.lazy` in `App.tsx`.
 ## Contributing
 
 1. Read `AGENTS.md` and `TEAM_INSTRUCTIONS.md` before writing code.
-2. Pick work from `BACKLOGS_v1.md` aligned with the current sprint in `SPRINT_PLAN_v1.md`.
+2. Pick work from `BACKLOGS_v1.md` aligned with the current sprint in `SPRINT_PLAN_v2.md`.
 3. Work on the **shared active branch** only — do not create personal branches unless instructed.
 4. Before every commit: `git pull`, then from repo root — `npm run lint`, `npm run test`, and `npm run build` (or run the equivalent scripts inside the package you changed).
 5. Keep commits focused; include screenshots for UI changes when reviewing with the team.
@@ -290,7 +369,8 @@ Non-home routes are lazy-loaded via `React.lazy` in `App.tsx`.
 | [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) | PM, stakeholders | Status and scope |
 | [TEAM_INSTRUCTIONS.md](./TEAM_INSTRUCTIONS.md) | Team by role | Responsibilities |
 | [BACKLOGS_v1.md](./BACKLOGS_v1.md) | PM, Tech Lead | Prioritized work |
-| [SPRINT_PLAN_v1.md](./SPRINT_PLAN_v1.md) | Whole team | Sprint tasks and criteria |
+| [SPRINT_PLAN_v2.md](./SPRINT_PLAN_v2.md) | Whole team | Sprint 2 tasks and criteria |
+| [SPRINT_PLAN_v1.md](./SPRINT_PLAN_v1.md) | Whole team | Preparation phase sprint plan |
 | Technical Documentation | Reference only | Legacy StuTech docs (do not modify) |
 
 ## Known Issues

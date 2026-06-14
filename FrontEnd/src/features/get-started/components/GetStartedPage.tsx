@@ -1,8 +1,17 @@
 import { Footer } from "@/components/Footer";
 import { GetStartedForm } from "@/features/get-started/components/GetStartedForm";
 import { BRAND_NAME } from "@/lib/brand";
+import { useLocation } from "react-router-dom";
+
+type GetStartedLocationState = {
+  email?: string;
+};
 
 export function GetStartedPage() {
+  const location = useLocation();
+  const state = location.state as GetStartedLocationState | null;
+  const initialEmail = state?.email ?? "";
+
   return (
     <>
       <main className="bg-xone-section px-4 py-12 sm:px-6 lg:px-8">
@@ -49,7 +58,7 @@ export function GetStartedPage() {
             </ol>
           </section>
 
-          <GetStartedForm />
+          <GetStartedForm initialEmail={initialEmail} />
         </div>
       </main>
       <Footer />

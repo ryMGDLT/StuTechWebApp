@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ApiRequestError } from "@/lib/api";
+import { submitGetStartedForm } from "@/features/get-started/services/submit-get-started";
 import {
   projectTypeOptions,
   timelineOptions,
@@ -9,7 +11,7 @@ import {
   type GetStartedFormInput,
 } from "@/features/get-started/schemas/get-started-form";
 
-const initialFormState: GetStartedFormInput = {
+const defaultFormState: GetStartedFormInput = {
   name: "",
   email: "",
   company: "",
@@ -19,24 +21,34 @@ const initialFormState: GetStartedFormInput = {
 };
 
 const selectClassName =
-  "h-9 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm";
+  "h-9 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm disabled:cursor-not-allowed disabled:opacity-50";
 
-export function GetStartedForm() {
-  const [form, setForm] = useState<GetStartedFormInput>(initialFormState);
+type GetStartedFormProps = {
+  initialEmail?: string;
+};
+
+export function GetStartedForm({ initialEmail = "" }: GetStartedFormProps) {
+  const [form, setForm] = useState<GetStartedFormInput>({
+    ...defaultFormState,
+    email: initialEmail,
+  });
   const [errors, setErrors] = useState<
     Partial<Record<keyof GetStartedFormInput, string>>
   >({});
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field: keyof GetStartedFormInput, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
     setSubmitStatus("idle");
+    setSubmitMessage("");
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const result = validateGetStartedForm(form);
@@ -46,8 +58,34 @@ export function GetStartedForm() {
     }
 
     setErrors({});
-    setSubmitStatus("success");
-    setForm(initialFormState);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+    setIsSubmitting(true);
+
+    try {
+      await submitGetStartedForm(result.data);
+      setSubmitStatus("success");
+      setSubmitMessage(
+        "Thanks — we've captured your details. A team member will follow up within one business day.",
+      );
+      setForm(defaultFormState);
+    } catch (error) {
+      setSubmitStatus("error");
+
+      if (error instanceof ApiRequestError && error.errors) {
+        setErrors(
+          error.errors as Partial<Record<keyof GetStartedFormInput, string>>,
+        );
+      }
+
+      setSubmitMessage(
+        error instanceof ApiRequestError
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,6 +108,7 @@ export function GetStartedForm() {
             aria-describedby={errors.name ? "get-started-name-error" : undefined}
             autoComplete="name"
             required
+            disabled={isSubmitting}
           />
           {errors.name ? (
             <p id="get-started-name-error" className="text-sm text-destructive">
@@ -94,6 +133,7 @@ export function GetStartedForm() {
             }
             autoComplete="email"
             required
+            disabled={isSubmitting}
           />
           {errors.email ? (
             <p id="get-started-email-error" className="text-sm text-destructive">
@@ -117,6 +157,7 @@ export function GetStartedForm() {
             errors.company ? "get-started-company-error" : undefined
           }
           autoComplete="organization"
+          disabled={isSubmitting}
         />
         {errors.company ? (
           <p id="get-started-company-error" className="text-sm text-destructive">
@@ -142,6 +183,7 @@ export function GetStartedForm() {
               errors.projectType ? "get-started-project-type-error" : undefined
             }
             className={selectClassName}
+            disabled={isSubmitting}
           >
             {projectTypeOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -173,6 +215,7 @@ export function GetStartedForm() {
               errors.timeline ? "get-started-timeline-error" : undefined
             }
             className={selectClassName}
+            disabled={isSubmitting}
           >
             {timelineOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -207,7 +250,8 @@ export function GetStartedForm() {
           rows={4}
           placeholder="What are you looking to build? Who is it for?"
           required
-          className="w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
+          disabled={isSubmitting}
+          className="w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm disabled:cursor-not-allowed disabled:opacity-50"
         />
         {errors.description ? (
           <p
@@ -219,8 +263,14 @@ export function GetStartedForm() {
         ) : null}
       </div>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
-        Request a discovery call
+      <Button
+        type="submit"
+        size="lg"
+        className="w-full sm:w-auto"
+        disabled={isSubmitting}
+        aria-busy={isSubmitting}
+      >
+        {isSubmitting ? "Submitting…" : "Request a discovery call"}
       </Button>
 
       {submitStatus === "success" ? (
@@ -228,8 +278,7 @@ export function GetStartedForm() {
           role="status"
           className="rounded-lg border border-xone-cyan/30 bg-xone-accent-muted px-4 py-3 text-sm text-foreground"
         >
-          Thanks — we&apos;ve captured your details. A team member will follow up
-          within one business day. Prefer to talk now?{" "}
+          {submitMessage} Prefer to talk now?{" "}
           <Link
             to="/contact"
             className="font-medium text-xone-violet underline-offset-4 hover:underline"
@@ -237,6 +286,15 @@ export function GetStartedForm() {
             Contact us directly
           </Link>
           .
+        </p>
+      ) : null}
+
+      {submitStatus === "error" ? (
+        <p
+          role="alert"
+          className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
+          {submitMessage}
         </p>
       ) : null}
     </form>

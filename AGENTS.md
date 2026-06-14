@@ -55,10 +55,11 @@ StuTechWebApp/
     tsconfig.json
   BackEnd/               # Optional Express API (future)
     src/
-      routes/
-      controllers/
-      services/
-      schemas/
+      lib/               # env validation, shared helpers
+      schemas/           # Zod input DTOs
+      services/          # Business logic (lead submission)
+      routes/            # Thin route handlers
+      middleware/        # Error handling, rate limiting
     server.js            # Entry point (migrate to TypeScript over time)
   AGENTS.md
   README.md

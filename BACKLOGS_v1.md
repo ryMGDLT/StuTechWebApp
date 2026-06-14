@@ -2,8 +2,8 @@
 
 Version 1 backlog for the Xone Software Development lead-generation website.
 
-**Phase:** Preparation  
-**Last updated:** Week 2 sprint (June 2026)
+**Phase:** Sprint 2 (Week 3 complete; Week 4 next)  
+**Last updated:** Sprint 2 Week 3 (June 2026)
 
 Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 
@@ -16,7 +16,7 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 | FND-01 | P0 | Add root and FrontEnd `.gitignore` entries for `.env`, `node_modules`, `dist` | Done — `.env` gitignored; run `git rm --cached FrontEnd/.env` if previously tracked |
 | FND-02 | P0 | Create `FrontEnd/.env.example` with safe placeholders | Done — `VITE_API_BASE_URL` documented |
 | FND-03 | P0 | Fix `Main.tsx` CSS import (`index.css` missing) | Done — `index.css` is Tailwind entry |
-| FND-04 | P1 | Remove `BackEnd/node_modules` from git tracking | `BackEnd/.gitignore` covers `node_modules`; run `git rm -r --cached BackEnd/node_modules` to untrack (1178 files still indexed) |
+| FND-04 | P1 | Remove `BackEnd/node_modules` from git tracking | Done — `git rm -r --cached` applied |
 | FND-05 | P1 | Add root-level dev scripts or document two-terminal workflow | See README |
 | FND-06 | P2 | Add CI workflow: lint + build on PR | Done — `.github/workflows/ci.yml` + `cd.yml` |
 | FND-07 | P2 | Configure ESLint for TypeScript files | Done — `typescript-eslint` for `*.{ts,tsx}` |
@@ -45,7 +45,7 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 | PG-01 | P0 | Implement Services page | Done — `features/services/` |
 | PG-02 | P0 | Implement About page | Done — `features/about/` |
 | PG-03 | P0 | Implement Process page | Done — `features/process/` |
-| PG-04 | P0 | Implement Contact page | Done — `features/contact/` with Zod schema; API pending |
+| PG-04 | P0 | Implement Contact page | Done — `features/contact/` with Zod schema + API wiring |
 | PG-05 | P1 | Implement Get Started page | Done — `features/get-started/` with lead qualification form |
 | PG-06 | P1 | Extract shared Footer component | Done — `components/Footer.tsx` used on Homepage + pages |
 | PG-07 | P2 | Add mobile hamburger navigation | Done — shadcn Sheet mobile menu at `<md` |
@@ -62,7 +62,7 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 | ARCH-03 | P2 | Shared UI primitives: Button, SectionHeading, Card | Done — shadcn/ui Button, Input, Card, Badge |
 | ARCH-06 | P1 | Migrate interactive UI to shadcn/ui | Done — init + Navbar, Homepage CTAs, route placeholders |
 | ARCH-04 | P2 | Centralize route definitions | `src/routes.tsx` |
-| ARCH-05 | P3 | Add `src/lib/env.ts` for `import.meta.env` access | Single validated entry point |
+| ARCH-05 | P3 | Add `src/lib/env.ts` for `import.meta.env` access | Done — `getApiBaseUrl()`, `buildApiUrl()` |
 
 ---
 
@@ -70,12 +70,12 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 
 | ID | Priority | Item | Notes |
 |----|----------|------|-------|
-| API-01 | P1 | `POST /api/contact` with Zod validation | name, email, message fields |
-| API-02 | P1 | Rate limiting on contact endpoint | Prevent abuse |
-| API-03 | P2 | Email notification or webhook integration | SendGrid, Resend, or CRM |
-| API-04 | P2 | Wire homepage email CTA and contact form to API | Remove non-functional inputs |
-| API-05 | P3 | Migrate `BackEnd/server.js` to TypeScript | `src/` layout per AGENTS.md |
-| API-06 | P3 | Health check route `GET /api/health` | Deployment monitoring |
+| API-01 | P1 | `POST /api/contact` with Zod validation | Done — `BackEnd/src/routes/contact-routes.js` |
+| API-02 | P1 | Rate limiting on contact endpoint | Done — `express-rate-limit`, 10 req / 15 min default |
+| API-03 | P2 | Email notification or webhook integration | Optional webhook via `CONTACT_WEBHOOK_URL` (Week 4) |
+| API-04 | P2 | Wire homepage email CTA and contact form to API | Done — forms POST to API via Vite proxy |
+| API-05 | P3 | Migrate `BackEnd/server.js` to TypeScript | `src/` layout started in JS; TS migration pending |
+| API-06 | P3 | Health check route `GET /api/health` | Done — deployment monitoring endpoint |
 
 **Note:** Legacy `Technical Documentation` user CRUD APIs are **not** in v1 scope unless product direction changes.
 
@@ -86,10 +86,10 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 | ID | Priority | Item | Notes |
 |----|----------|------|-------|
 | SEC-01 | P0 | Ensure `.env` is not committed | Done — gitignored; verify with `git ls-files` (not tracked) |
-| SEC-02 | P1 | Server-side validation for all form fields | Client-only validation is insufficient |
-| SEC-03 | P1 | Sanitize/validate email input on contact forms | Homepage has uncontrolled email input |
+| SEC-02 | P1 | Server-side validation for all form fields | Done — Zod at API boundary (contact + get-started) |
+| SEC-03 | P1 | Sanitize/validate email input on contact forms | Done — server + client Zod; homepage CTA routes to Get Started |
 | SEC-04 | P2 | Add security headers on production host | CSP, X-Frame-Options via hosting config |
-| SEC-05 | P2 | CORS allowlist for API | When backend is public |
+| SEC-05 | P2 | CORS allowlist for API | Done — `CORS_ORIGIN` in `BackEnd/.env` |
 | SEC-06 | P3 | Dependency audit (`npm audit`) in CI | FrontEnd and BackEnd |
 
 ---
@@ -113,7 +113,7 @@ Priority key: **P0** critical · **P1** high · **P2** medium · **P3** low
 |----|----------|------|-------|
 | QA-01 | P1 | Manual test matrix: browsers × breakpoints | Document in QA wiki |
 | QA-02 | P2 | Add Vitest for Zod schemas and utilities | Done — contact form schema tests |
-| QA-03 | P2 | Add API integration tests | BackEnd when routes exist |
+| QA-03 | P2 | Add API integration tests | Done — `BackEnd/tests/api.test.js` (health, contact, get-started, rate limit) |
 | QA-04 | P3 | Playwright smoke test: nav + contact flow | E2E |
 
 ---

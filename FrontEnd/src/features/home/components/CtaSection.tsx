@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export function CtaSection() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleGetStarted = () => {
+    const trimmedEmail = email.trim();
+    navigate("/get-started", {
+      state: trimmedEmail ? { email: trimmedEmail } : undefined,
+    });
+  };
 
   return (
     <section
@@ -25,13 +34,15 @@ export function CtaSection() {
           <Input
             type="email"
             placeholder="What's your work email?"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             className="h-11 flex-1 border-0 bg-white px-4 shadow-none focus-visible:ring-0"
             aria-label="Work email"
           />
           <Button
             size="lg"
             className="h-11 px-6 font-semibold"
-            onClick={() => navigate("/get-started")}
+            onClick={handleGetStarted}
           >
             Get started
           </Button>
