@@ -33,7 +33,7 @@ This file defines the non-negotiable engineering rules for this project. It is i
 Use feature-based organization inside the frontend. Shared utilities must stay minimal and genuinely reusable.
 
 ```text
-StuTechWebApp/
+xone-website/
   FrontEnd/
     public/              # Static assets (images, favicon, robots.txt)
     src/

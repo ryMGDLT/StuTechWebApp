@@ -18,7 +18,7 @@ Static marketing website for **Xone Software Development**, built to attract pro
 ## Project Structure
 
 ```text
-StuTechWebApp/
+xone-website/
 ├── FrontEnd/                 # Vite + React SPA
 │   ├── public/               # Static assets (images, favicon)
 │   ├── src/
@@ -55,8 +55,8 @@ The frontend follows a **feature-based architecture** documented in `AGENTS.md`.
 ### 1. Clone the repository
 
 ```sh
-git clone <repository-url>
-cd StuTechWebApp
+git clone https://github.com/branding/xone-website.git
+cd xone-website
 ```
 
 ### 2. Install dependencies (recommended — from repo root)
@@ -103,7 +103,7 @@ Edit `.env` files with local values. Only `VITE_*` variables are exposed to the 
 
 The repo root has a **convenience** `package.json` that delegates to `FrontEnd/` and `BackEnd/`. It does **not** replace those packages and is **not** used by Vercel when each project’s Root Directory is set correctly (see [Build and Deploy](#build-and-deploy)).
 
-Run all commands below from the **repository root** (`StuTechWebApp/`).
+Run all commands below from the **repository root** (`xone-website/`).
 
 ### Install
 
@@ -364,6 +364,7 @@ Non-home routes are lazy-loaded via `React.lazy` in `App.tsx`.
 
 | Document | Audience | Purpose |
 |----------|----------|---------|
+| [FORK_SETUP.md](./FORK_SETUP.md) | Developers | Fork to `branding/xone-website`, deploy your own stack |
 | [README.md](./README.md) | All developers | Setup, workflow, deploy |
 | [AGENTS.md](./AGENTS.md) | All developers | Security and coding rules |
 | [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) | PM, stakeholders | Status and scope |

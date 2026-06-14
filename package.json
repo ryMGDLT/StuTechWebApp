@@ -1,7 +1,7 @@
 {
-  "name": "xone-leadgen-webapp",
+  "name": "xone-website",
   "private": true,
-  "description": "Root scripts for Xone Software Development lead-generation website",
+  "description": "Xone Software Development — marketing site and lead capture API (monorepo)",
   "scripts": {
     "install:all": "npm install --prefix FrontEnd && npm install --prefix BackEnd",
     "dev": "concurrently -n frontend,backend -c blue,green \"npm run dev --prefix FrontEnd\" \"npm run dev --prefix BackEnd\"",
