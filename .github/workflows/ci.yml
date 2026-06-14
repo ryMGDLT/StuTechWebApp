@@ -1,8 +1,14 @@
 name: CI
 
+# Quality gate for github.com/branding/xone-website (local clone: xone-swe-web).
+# Runs on every push and pull request. Production deploy is external — see DEPLOY.md.
+
 on:
   push:
   pull_request:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}

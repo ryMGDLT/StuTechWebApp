@@ -1,26 +1,30 @@
-name: CD
+name: CD — Production build verify
 
-# Simple static deploy to GitHub Pages after CI checks on main.
-# Enable in repo Settings → Pages → Source: GitHub Actions.
-# Set VITE_BASE_PATH in repo variables if the site is not served from domain root.
+# branding/xone-website fork: production hosting is NOT GitHub Pages.
+#   FrontEnd → Vercel  (Root Directory: FrontEnd, repo: branding/xone-website)
+#   BackEnd  → Railway  (root: BackEnd, repo: branding/xone-website)
+#
+# Vercel and Railway deploy via their GitHub integrations on push to the connected branch.
+# This workflow verifies a production-like FrontEnd build on deployment branches.
+# Set repository variable VITE_API_BASE_URL to match your Railway API origin (optional).
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - branding/xone-website
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: cd-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build static site
+  verify-production-build:
+    name: FrontEnd — production build verify
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,24 +49,12 @@ jobs:
       - name: Unit tests
         run: npm run test
 
-      - name: Build
+      - name: Production build (Vercel-like env)
         run: npm run build
         env:
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '' }}
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: FrontEnd/dist
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy note
+        run: |
+          echo "Production deploy is handled by Vercel (FrontEnd) and Railway (BackEnd)."
+          echo "See DEPLOY.md for dashboard setup and env wiring."
