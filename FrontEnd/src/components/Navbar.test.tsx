@@ -1,22 +1,44 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import Navbar from "./Navbar";
 
 describe("Navbar", () => {
-  it("renders primary navigation links", () => {
+  it("renders primary navigation links on desktop", () => {
     render(
       <MemoryRouter>
         <Navbar />
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /services/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /contact/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /get started/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /^home$/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /^services$/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /^contact$/i })).toBeInTheDocument();
     expect(
       screen.getByRole("img", { name: /xone software development/i }),
     ).toBeInTheDocument();
+  });
+
+  it("opens mobile menu with all navigation links", () => {
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>,
+    );
+
+    const menuButton = screen.getByRole("button", {
+      name: /open navigation menu/i,
+    });
+    fireEvent.click(menuButton);
+
+    const mobileNav = screen.getByRole("navigation", {
+      name: /mobile navigation/i,
+    });
+    expect(mobileNav).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("link", { name: /^get started$/i }).length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole("link", { name: /^about$/i }).length).toBe(1);
+    expect(screen.getAllByRole("link", { name: /^process$/i }).length).toBe(1);
   });
 });

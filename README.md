@@ -22,8 +22,9 @@ StuTechWebApp/
 ├── FrontEnd/                 # Vite + React SPA
 │   ├── public/               # Static assets (images, favicon)
 │   ├── src/
-│   │   ├── components/       # Shared UI (Navbar, etc.)
-│   │   ├── views/            # Page-level components
+│   │   ├── components/       # Shared UI (Navbar, Footer, etc.)
+│   │   ├── features/         # Feature modules (services, about, process, contact)
+│   │   ├── views/            # Homepage and legacy page-level components
 │   │   ├── App.tsx           # Router setup
 │   │   └── Main.tsx          # React entry point
 │   ├── index.html
@@ -39,7 +40,7 @@ StuTechWebApp/
 └── SPRINT_PLAN_v1.md         # Preparation phase sprint plan
 ```
 
-The frontend follows a **feature-based architecture** target layout documented in `AGENTS.md`. Current code uses `views/` and `components/`; new work should migrate toward `src/features/<name>/`.
+The frontend follows a **feature-based architecture** documented in `AGENTS.md`. Marketing routes live under `src/features/`; the homepage orchestrates section components from `features/home/components/`.
 
 ## Prerequisites
 
@@ -252,13 +253,15 @@ Deploy `BackEnd/` to a Node-compatible host (Railway, Render, Fly.io). Set envir
 
 | Path | Status |
 |------|--------|
-| `/home` | Homepage (partial) |
-| `/services` | Stub — Sprint 1 Week 2 |
-| `/about` | Stub — Sprint 1 Week 2 |
-| `/process` | Stub — Sprint 1 Week 2 |
-| `/contact` | Stub — Sprint 1 Week 2 |
-| `/get-started` | Stub — Sprint 1 Week 2 |
-| `*` | Redirects to homepage content |
+| `/home` | Homepage — section components in `features/home/` |
+| `/services` | Services page — `features/services/` |
+| `/about` | About page — `features/about/` |
+| `/process` | Process page — `features/process/` |
+| `/contact` | Contact page — `features/contact/` (form UI; API pending) |
+| `/get-started` | Get Started page — `features/get-started/` (lead qualification) |
+| `*` | Falls back to homepage |
+
+Non-home routes are lazy-loaded via `React.lazy` in `App.tsx`.
 
 ## Contributing
 
@@ -296,7 +299,7 @@ See `BACKLOGS_v1.md` for the full list. Highlights:
 
 - Brand assets live in `FrontEnd/public/assets/XONE/` (commit to git)
 - Legacy decorative images under `/assets/images/` may still 404 until replaced
-- Five routes are placeholder stubs
+- Five marketing routes with real content; homepage decomposed into section components
 
 ## License
 

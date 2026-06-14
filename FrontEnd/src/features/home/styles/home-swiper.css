@@ -1,0 +1,49 @@
+.home-team-swiper .swiper-button-prev,
+.home-team-swiper .swiper-button-next {
+  color: #533bda;
+  --swiper-navigation-size: 24px;
+  padding: 10px;
+}
+
+.home-team-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #94a3b8;
+  opacity: 0.5;
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.home-team-swiper .swiper-pagination-bullet-active {
+  width: 16px;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #533bda;
+  opacity: 1;
+}
+
+.home-team-swiper {
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.home-team-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

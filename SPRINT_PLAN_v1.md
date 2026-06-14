@@ -42,11 +42,13 @@ Fix broken foundations, secure repo hygiene, apply Xone brand to existing UI.
 
 ### Week 1 Acceptance Criteria
 
-- [ ] `cd FrontEnd && npm install && npm run build` succeeds
-- [ ] No `.env` file tracked in git
-- [ ] User-visible strings say "Xone Software Development" (or approved short name "Xone")
-- [ ] Logo and at least hero/decoration images load without 404
-- [ ] Browser tab title reflects Xone brand
+- [x] `cd FrontEnd && npm install && npm run build` succeeds
+- [x] No `.env` file tracked in git (gitignored; use `git rm --cached` if locally tracked)
+- [x] User-visible strings say "Xone Software Development" (or approved short name "Xone")
+- [x] Logo and brand assets load without 404 (`public/assets/XONE/xone_brand_kit/`)
+- [x] Browser tab title reflects Xone brand
+
+**Week 1 stretch (completed early):** Services, About, Process, and Contact pages implemented; shared Footer extracted; team carousel uses initials avatars.
 
 ---
 
@@ -72,10 +74,10 @@ Replace route stubs, begin homepage decomposition, mobile polish.
 
 ### Week 2 Acceptance Criteria
 
-- [ ] `/services`, `/about`, `/process`, `/contact`, `/get-started` show real content (not single-line stubs)
-- [ ] Mobile navigation works at 375px width
-- [ ] No horizontal scroll on homepage at mobile breakpoints
-- [ ] Homepage split into at least 3 section components (hero, team, services or equivalent)
+- [x] `/services`, `/about`, `/process`, `/contact`, `/get-started` show real content (not single-line stubs)
+- [x] Mobile navigation works at 375px width
+- [x] No horizontal scroll on homepage at mobile breakpoints
+- [x] Homepage split into at least 3 section components (hero, team, services or equivalent)
 - [ ] QA test matrix completed with no P0 defects open
 
 ---
@@ -136,8 +138,8 @@ Prepare backlog for immediate follow-up:
 
 | Week | Milestone |
 |------|-----------|
-| Week 1 | Dev environment stable, Xone brand on homepage, assets in repo |
-| Week 2 | All marketing routes live, mobile nav, homepage refactor started |
+| Week 1 | Dev environment stable, Xone brand applied, core pages (Services/About/Process/Contact), Footer extracted |
+| Week 2 | Get Started page, mobile nav, homepage section extraction, lazy-loaded routes — **complete** |
 | Week 3+ (Sprint 2) | Lead capture API, deployment, legal pages |
 
 ---
