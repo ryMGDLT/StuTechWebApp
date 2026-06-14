@@ -8,7 +8,7 @@
 
 ## 1. Context in one paragraph
 
-This is the **Xone Software Development** lead-generation website: React 19 + Vite 7 + TypeScript (FrontEnd) and Express 5 (BackEnd) for contact/get-started lead capture. **Sprint 1 (Preparation)** and **Sprint 2 Week 3 (API + form wiring)** are complete. **Sprint 2 Week 4 (deploy, legal, QA)** is the active phase. The user forked the original team repo to **`github.com/branding/xone-website`** and prefers a **new local directory** (`xone-website`), not the old `StuTechWebApp` folder.
+This is the **Xone Software Development** lead-generation website: React 19 + Vite 7 + TypeScript (FrontEnd) and Express 5 (BackEnd) for contact/get-started lead capture. **Sprint 1 (Preparation)** and **Sprint 2 Week 3 (API + form wiring)** are complete. **Sprint 2 Week 4 (deploy, legal, QA)** is the active phase. The user forked the original team repo to **`github.com/branding/xone-website`** and works from a **local directory** named **`xone-swe-web`** (not the old `StuTechWebApp` folder).
 
 ---
 
@@ -18,8 +18,8 @@ This is the **Xone Software Development** lead-generation website: React 19 + Vi
 
 ```powershell
 cd C:\Users\shiro\dev-project-systems
-git clone https://github.com/branding/xone-website.git
-cd xone-website
+git clone https://github.com/branding/xone-website.git xone-swe-web
+cd xone-swe-web
 ```
 
 ### Verify remotes
@@ -48,7 +48,7 @@ npm run dev
 
 ### Open in Cursor
 
-- **File → Open Folder** → `xone-website`  
+- **File → Open Folder** → `xone-swe-web` (e.g. `C:\Users\shiro\dev-project-systems\xone-swe-web`)  
 - Start a **new agent chat** and paste the opener in §8 below.
 
 ---
@@ -114,6 +114,8 @@ npm run dev
 
 ## 5. Deployment checklist (Week 4)
 
+**Full step-by-step guide:** see [`DEPLOY.md`](./DEPLOY.md) (Vercel + Railway, env vars, CLI commands, CORS wiring).
+
 ### Vercel (FrontEnd)
 
 | Setting | Value |
@@ -171,7 +173,8 @@ BackEnd/tests/api.test.js
 **Engineering rules:** Read `AGENTS.md` before any code change.  
 **Team workflow:** `TEAM_INSTRUCTIONS.md` — shared branch, pull before commit, run lint/test/build.  
 **Backlog source of truth:** `BACKLOGS_v1.md`, `SPRINT_PLAN_v2.md` (Week 4 section).  
-**Fork ops:** `FORK_SETUP.md`.
+**Fork ops:** `FORK_SETUP.md`.  
+**Production deploy:** `DEPLOY.md` (Vercel + Railway step-by-step).
 
 **Git:** User commits manually — **do not commit unless explicitly asked.**
 
@@ -190,7 +193,7 @@ BackEnd/tests/api.test.js
 ## 8. Opener for the new agent chat (copy-paste)
 
 ```
-Workspace: fresh clone of github.com/branding/xone-website (folder: xone-website).
+Workspace: fresh clone of github.com/branding/xone-website (local folder: xone-swe-web).
 Read AGENT_HANDOVER.md, AGENTS.md, and SPRINT_PLAN_v2.md Week 4.
 
 Sprint 2 Week 3 is complete. Priority: deploy FrontEnd (Vercel, Root=FrontEnd) and BackEnd (Railway), wire VITE_API_BASE_URL and CORS_ORIGIN, then BRD-06 legal pages and QA sign-off.
